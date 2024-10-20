@@ -26,7 +26,7 @@ final class PropertyListView: UIView {
         let tableView = UITableView(frame: .zero, style: .grouped)
         tableView.backgroundColor = UIColor.systemBackground
         tableView.register(PropertyListViewCell.self, forCellReuseIdentifier: PropertyListViewCell.reuseId)
-        tableView.separatorColor = .clear
+        tableView.separatorStyle = .none
         tableView.translatesAutoresizingMaskIntoConstraints = false
         return tableView
     }()
