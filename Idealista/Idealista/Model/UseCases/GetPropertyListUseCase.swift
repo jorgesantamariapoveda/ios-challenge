@@ -14,7 +14,7 @@ protocol GetPropertyListUseCase {
 final class GetPropertyListUseCaseImpl: GetPropertyListUseCase {
     private let propertyRepository: PropertyRepository
     
-    init(propertyRepository: PropertyRepository) {
+    init(propertyRepository: PropertyRepository = PropertyRepositoryImpl()) {
         self.propertyRepository = propertyRepository
     }
     
