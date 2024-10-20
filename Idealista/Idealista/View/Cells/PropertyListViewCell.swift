@@ -11,7 +11,7 @@ final class PropertyListViewCell: UITableViewCell {
     
     static let reuseId = "PropertyListCell"
     
-    private var addressLabelView = AddressLabel()
+    private var addressLabelView = AddressLabelView()
     private var priceLabel = PriceLabel()
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
