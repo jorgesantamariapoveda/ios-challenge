@@ -16,7 +16,6 @@ extension AppDelegate {
         appearance.titleTextAttributes = [
             NSAttributedString.Key.foregroundColor: UIColor.idealistaGrayBlack
         ]
-        
         UINavigationBar.appearance().standardAppearance = appearance
         UINavigationBar.appearance().scrollEdgeAppearance = appearance
         
