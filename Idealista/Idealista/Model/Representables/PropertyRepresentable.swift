@@ -20,7 +20,7 @@ struct PropertyRepresentable: Hashable {
         self.id = domainModel.id
         self.imagesUrl = domainModel.imagesUrl
         self.address = domainModel.address
-        self.price = "\(domainModel.priceAmount) \(domainModel.priceCurrencySuffix)"
+        self.price = "\(domainModel.priceAmount.formatToCurrencyWithoutCurrencySymbol()) \(domainModel.priceCurrencySuffix)"
         self.isParkingSpaceIncludedInPrice = domainModel.isParkingSpaceIncludedInPrice
         self.rooms = "\(domainModel.rooms)"
         self.size = "\(domainModel.size) m²"
