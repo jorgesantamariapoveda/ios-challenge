@@ -25,7 +25,7 @@ final class PropertyListView: UIView {
     private lazy var tableView: UITableView = {
         let tableView = UITableView(frame: .zero, style: .grouped)
         tableView.backgroundColor = UIColor.systemBackground
-        tableView.register(PropertyListCell.self, forCellReuseIdentifier: PropertyListCell.reuseId)
+        tableView.register(PropertyListViewCell.self, forCellReuseIdentifier: PropertyListViewCell.reuseId)
         tableView.separatorColor = .clear
         tableView.translatesAutoresizingMaskIntoConstraints = false
         return tableView
@@ -74,8 +74,8 @@ final class PropertyListView: UIView {
     }
 
     private func configureDataSource() {
-        dataSource = UITableViewDiffableDataSource<Int, PropertyRepresentable>(tableView: tableView) { (tableView, indexPath, item) -> PropertyListCell? in
-            let cell = tableView.dequeueReusableCell(withIdentifier: PropertyListCell.reuseId, for: indexPath) as? PropertyListCell
+        dataSource = UITableViewDiffableDataSource<Int, PropertyRepresentable>(tableView: tableView) { (tableView, indexPath, item) -> PropertyListViewCell? in
+            let cell = tableView.dequeueReusableCell(withIdentifier: PropertyListViewCell.reuseId, for: indexPath) as? PropertyListViewCell
             cell?.set(representable: item)
             return cell
         }

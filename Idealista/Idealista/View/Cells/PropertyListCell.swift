@@ -1,5 +1,5 @@
 //
-//  PropertyListCell.swift
+//  PropertyListViewCell.swift
 //  Idealista
 //
 //  Created by Jorge on 20/10/24.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class PropertyListCell: UITableViewCell {
+final class PropertyListViewCell: UITableViewCell {
     
     static let reuseId = "PropertyListCell"
     
