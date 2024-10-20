@@ -8,7 +8,7 @@
 import Foundation
 
 protocol DetailPropertyRepository {
-    func fetch(property: Property) async throws -> DetailProperty
+    func fetch() async throws -> DetailProperty
 }
 
 final class DetailPropertyRepositoryImpl: DetailPropertyRepository {
@@ -23,8 +23,8 @@ final class DetailPropertyRepositoryImpl: DetailPropertyRepository {
         self.mapper = mapper
     }
     
-    func fetch(property: Property) async throws -> DetailProperty {
+    func fetch() async throws -> DetailProperty {
         let propertyDTO = try await apiDataSource.fetchAll()
-        return mapper.map(from: propertyDTO, property: property)
+        return mapper.map(from: propertyDTO)
     }
 }

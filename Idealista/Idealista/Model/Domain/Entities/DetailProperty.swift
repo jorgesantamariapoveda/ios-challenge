@@ -8,7 +8,6 @@
 import Foundation
 
 struct DetailProperty {
-    let property: Property
     let description: String
     let latitude: Double
     let longitude: Double

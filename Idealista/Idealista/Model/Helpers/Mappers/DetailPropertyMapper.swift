@@ -8,14 +8,13 @@
 import Foundation
 
 protocol DetailPropertyMapper {
-    func map(from dto: DetailPropertyDTO, property: Property) -> DetailProperty
+    func map(from dto: DetailPropertyDTO) -> DetailProperty
 }
 
 final class DetailPropertyMapperImpl: DetailPropertyMapper {
     
-    func map(from dto: DetailPropertyDTO, property: Property) -> DetailProperty {
+    func map(from dto: DetailPropertyDTO) -> DetailProperty {
         DetailProperty(
-            property: property,
             description: dto.propertyComment,
             latitude: dto.ubication.latitude,
             longitude: dto.ubication.longitude,

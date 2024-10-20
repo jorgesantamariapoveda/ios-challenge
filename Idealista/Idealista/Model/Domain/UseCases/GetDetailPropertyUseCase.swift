@@ -8,7 +8,7 @@
 import Foundation
 
 protocol GetDetailPropertyUseCase {
-    func execute(property: Property) async throws -> DetailProperty
+    func execute() async throws -> DetailProperty
 }
 
 final class GetDetailPropertyUseCaseImpl: GetDetailPropertyUseCase {
@@ -18,7 +18,7 @@ final class GetDetailPropertyUseCaseImpl: GetDetailPropertyUseCase {
         self.repository = repository
     }
     
-    func execute(property: Property) async throws -> DetailProperty {
-        try await repository.fetch(property: property)
+    func execute() async throws -> DetailProperty {
+        try await repository.fetch()
     }
 }
