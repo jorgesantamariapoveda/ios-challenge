@@ -15,9 +15,12 @@ final class PropertyListViewCell: UITableViewCell {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
         view.backgroundColor = .clear
+        view.layer.borderWidth = 0.5
+        view.layer.borderColor = UIColor.idealistaGray.cgColor
         return view
     }()
     
+    // MARK: - Content
     private let addressLabelView = AddressLabelView()
     
     private let priceLabelView = PriceLabelView()
@@ -44,8 +47,20 @@ final class PropertyListViewCell: UITableViewCell {
         return stackView
     }()
     
+    private lazy var contentStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        stackView.axis = .vertical
+        stackView.spacing = 8
+        stackView.alignment = .leading
+        stackView.distribution = .fillProportionally
+        return stackView
+    }()
+    
+    // MARK: - HorizontalLine
     private let horizontalLineView = HorizontalLineView()
     
+    // MARK: - Footer
     private let phoneBottomButonView = BottomButonView()
     private let contactBottomButonView = BottomButonView()
     private let spacerView = UIView()
@@ -70,15 +85,21 @@ final class PropertyListViewCell: UITableViewCell {
         stackView.distribution = .fillProportionally
         return stackView
     }()
+    
+    private lazy var footerStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        stackView.axis = .horizontal
+        stackView.spacing = 10
+        stackView.alignment = .center
+        stackView.distribution = .fillProportionally
+        return stackView
+    }()
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
         selectionStyle = .none
-        
-        containerView.backgroundColor = .clear
-        containerView.layer.borderWidth = 0.5
-        containerView.layer.borderColor = UIColor.idealistaGray.cgColor
         
         addSubviews()
         addConstraints()
@@ -90,18 +111,22 @@ final class PropertyListViewCell: UITableViewCell {
     
     private func addSubviews() {
         contentView.addSubview(containerView)
-        containerView.addSubview(addressLabelView)
-        containerView.addSubview(priceAndParkingStackView)
-        containerView.addSubview(roomsAndSizeStackView)
+        containerView.addSubview(contentStackView)
         containerView.addSubview(horizontalLineView)
-        containerView.addSubview(bottomLeftButtonsStackView)
-        containerView.addSubview(bottomRightButtonsStackView)
+        containerView.addSubview(footerStackView)
+        
+        contentStackView.addArrangedSubview(addressLabelView)
+        contentStackView.addArrangedSubview(priceAndParkingStackView)
+        contentStackView.addArrangedSubview(roomsAndSizeStackView)
         
         priceAndParkingStackView.addArrangedSubview(priceLabelView)
         priceAndParkingStackView.addArrangedSubview(isParkingSpaceIncludedInPriceLabelView)
         
         roomsAndSizeStackView.addArrangedSubview(roomsLabelView)
         roomsAndSizeStackView.addArrangedSubview(sizeLabelView)
+        
+        footerStackView.addArrangedSubview(bottomLeftButtonsStackView)
+        footerStackView.addArrangedSubview(bottomRightButtonsStackView)
         
         bottomLeftButtonsStackView.addArrangedSubview(phoneBottomButonView)
         bottomLeftButtonsStackView.addArrangedSubview(contactBottomButonView)
@@ -120,38 +145,22 @@ final class PropertyListViewCell: UITableViewCell {
         ])
         
         NSLayoutConstraint.activate([
-            addressLabelView.topAnchor.constraint(equalTo: containerView.topAnchor),
-            addressLabelView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 10),
-            addressLabelView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor),
+            contentStackView.topAnchor.constraint(equalTo: containerView.topAnchor),
+            contentStackView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 10),
+            contentStackView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -10),
         ])
         
         NSLayoutConstraint.activate([
-            priceAndParkingStackView.topAnchor.constraint(equalTo: addressLabelView.bottomAnchor),
-            priceAndParkingStackView.leadingAnchor.constraint(equalTo: addressLabelView.leadingAnchor),
-        ])
-        
-        NSLayoutConstraint.activate([
-            roomsAndSizeStackView.topAnchor.constraint(equalTo: priceAndParkingStackView.bottomAnchor),
-            roomsAndSizeStackView.leadingAnchor.constraint(equalTo: addressLabelView.leadingAnchor),
-        ])
-        
-        NSLayoutConstraint.activate([
-            horizontalLineView.topAnchor.constraint(equalTo: roomsAndSizeStackView.bottomAnchor, constant: 10),
+            horizontalLineView.topAnchor.constraint(equalTo: contentStackView.bottomAnchor, constant: 10),
             horizontalLineView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor),
             horizontalLineView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor)
         ])
         
         NSLayoutConstraint.activate([
-            bottomLeftButtonsStackView.topAnchor.constraint(equalTo: horizontalLineView.bottomAnchor, constant: 10),
-            bottomLeftButtonsStackView.leadingAnchor.constraint(equalTo: addressLabelView.leadingAnchor),
-            bottomLeftButtonsStackView.trailingAnchor.constraint(greaterThanOrEqualTo: bottomRightButtonsStackView.leadingAnchor),
-            bottomLeftButtonsStackView.bottomAnchor.constraint(equalTo: containerView.bottomAnchor, constant: -10),
-        ])
-        
-        NSLayoutConstraint.activate([
-            bottomRightButtonsStackView.topAnchor.constraint(equalTo: horizontalLineView.bottomAnchor, constant: 10),
-            bottomRightButtonsStackView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -10),
-            bottomRightButtonsStackView.bottomAnchor.constraint(equalTo: bottomLeftButtonsStackView.bottomAnchor),
+            footerStackView.topAnchor.constraint(equalTo: horizontalLineView.bottomAnchor, constant: 10),
+            footerStackView.leadingAnchor.constraint(equalTo: contentStackView.leadingAnchor),
+            footerStackView.trailingAnchor.constraint(equalTo: contentStackView.trailingAnchor),
+            footerStackView.bottomAnchor.constraint(equalTo: containerView.bottomAnchor, constant: -10)
         ])
     }
     
