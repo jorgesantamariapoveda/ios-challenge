@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct PropertyDTO: Codable {
+struct PropertyDTO: Codable { //!! Review 🔴 poner propiedades reales para poder hacer el mapper
     let id: Int
     let title: String
     let description: String
