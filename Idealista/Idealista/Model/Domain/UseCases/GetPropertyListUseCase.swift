@@ -12,13 +12,13 @@ protocol GetPropertyListUseCase {
 }
 
 final class GetPropertyListUseCaseImpl: GetPropertyListUseCase {
-    private let propertyRepository: PropertyRepository
+    private let repository: PropertyRepository
     
-    init(propertyRepository: PropertyRepository = PropertyRepositoryImpl()) {
-        self.propertyRepository = propertyRepository
+    init(repository: PropertyRepository = PropertyRepositoryImpl()) {
+        self.repository = repository
     }
     
     func execute() async throws -> [Property] {
-        try await propertyRepository.fetchAll()
+        try await repository.fetchAll()
     }
 }

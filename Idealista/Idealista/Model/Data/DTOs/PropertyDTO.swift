@@ -17,27 +17,26 @@ struct PropertyDTO: Codable {
     let longitude: Double
     let multimedia: Multimedia
     let parkingSpace: ParkingSpace?
-}
-
-struct Multimedia: Codable {
-    let images: [Image]
-}
-
-struct Image: Codable {
-    let url: String
-    let tag: String
-}
-
-struct ParkingSpace: Codable {
-    let hasParkingSpace: Bool
-    let isParkingSpaceIncludedInPrice: Bool
-}
-
-struct PriceInfo: Codable {
-    let price: Price
-}
-
-struct Price: Codable {
-    let amount: Double
-    let currencySuffix: String
+    
+    struct Multimedia: Codable {
+        let images: [Image]
+    }
+    
+    struct Image: Codable {
+        let url: String
+    }
+    
+    struct ParkingSpace: Codable {
+        let hasParkingSpace: Bool
+        let isParkingSpaceIncludedInPrice: Bool
+    }
+    
+    struct PriceInfo: Codable {
+        let price: Price
+    }
+    
+    struct Price: Codable {
+        let amount: Double
+        let currencySuffix: String
+    }
 }

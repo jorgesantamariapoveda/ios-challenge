@@ -1,5 +1,5 @@
 //
-//  PropertyDetail.swift
+//  DetailProperty.swift
 //  Idealista
 //
 //  Created by Jorge on 19/10/24.
@@ -7,14 +7,8 @@
 
 import Foundation
 
-struct PropertyDetail {
-    let imagesUrl: [String]
-    let address: String
-    let price: Double
-    let currencySuffix: String
-    let isParkingSpaceIncludedInPrice: Bool
-    let rooms: Int
-    let size: Double
+struct DetailProperty {
+    let property: Property
     let description: String
     let latitude: Double
     let longitude: Double
@@ -25,6 +19,7 @@ struct PropertyDetail {
         let communityCosts: Double
         let rooms: Int
         let baths: Int
+        let boxroom: Bool
     }
     
     struct EnergyCertification {

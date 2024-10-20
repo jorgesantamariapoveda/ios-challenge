@@ -12,6 +12,7 @@ protocol PropertyMapper {
 }
 
 final class PropertyMapperImpl: PropertyMapper {
+    
     func map(from dto: PropertyDTO) -> Property {
         let imagesUrl = dto.multimedia.images.map { $0.url }
         

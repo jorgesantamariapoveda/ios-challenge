@@ -12,19 +12,19 @@ protocol PropertyRepository {
 }
 
 final class PropertyRepositoryImpl: PropertyRepository {
-    let propertyApiDataSource: PropertyApiDataSource
-    let propertyMapper: PropertyMapper
+    let apiDataSource: PropertyApiDataSource
+    let mapper: PropertyMapper
     
     init(
-        propertyApiService: PropertyApiDataSource = PropertyApiDataSourceImpl(),
-        propertyMapper: PropertyMapper = PropertyMapperImpl()
+        apiDataSource: PropertyApiDataSource = PropertyApiDataSourceImpl(),
+        mapper: PropertyMapper = PropertyMapperImpl()
     ) {
-        self.propertyApiDataSource = propertyApiService
-        self.propertyMapper = propertyMapper
+        self.apiDataSource = apiDataSource
+        self.mapper = mapper
     }
     
     func fetchAll() async throws -> [Property] {
-        let propertiesDTO = try await propertyApiDataSource.fetchAll()
-        return propertiesDTO.map { propertyMapper.map(from: $0) }
+        let propertiesDTO = try await apiDataSource.fetchAll()
+        return propertiesDTO.map { mapper.map(from: $0) }
     }
 }
