@@ -1,13 +1,13 @@
 //
-//  AddressLabelView.swift
+//  PriceLabelView.swift
 //  Idealista
 //
-//  Created by Jorge on 19/10/24.
+//  Created by Jorge on 20/10/24.
 //
 
 import UIKit
 
-final class AddressLabelView: UILabel {
+final class PriceLabelView: UILabel {
 
     required init() {
         super.init(frame: .zero)
@@ -21,8 +21,8 @@ final class AddressLabelView: UILabel {
     private func configureView() {
         translatesAutoresizingMaskIntoConstraints = false
         textAlignment = .left
-        font = .preferredFont(forTextStyle: .subheadline)
-        textColor = .idealistaPurple
+        font = UIFont.boldSystemFont(ofSize: UIFont.preferredFont(forTextStyle: .body).pointSize)
+        textColor = .black
     }
     
     func set(text: String) {

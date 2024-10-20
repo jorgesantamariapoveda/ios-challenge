@@ -1,13 +1,13 @@
 //
-//  AddressLabelView.swift
+//  FootLabelView.swift
 //  Idealista
 //
-//  Created by Jorge on 19/10/24.
+//  Created by Jorge on 20/10/24.
 //
 
 import UIKit
 
-final class AddressLabelView: UILabel {
+final class FootLabelView: UILabel {
 
     required init() {
         super.init(frame: .zero)
@@ -21,8 +21,8 @@ final class AddressLabelView: UILabel {
     private func configureView() {
         translatesAutoresizingMaskIntoConstraints = false
         textAlignment = .left
-        font = .preferredFont(forTextStyle: .subheadline)
-        textColor = .idealistaPurple
+        font = .preferredFont(forTextStyle: .caption1)
+        textColor = .gray
     }
     
     func set(text: String) {
