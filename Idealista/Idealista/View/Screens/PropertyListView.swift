@@ -61,7 +61,7 @@ final class PropertyListView: UIView {
     private func configureDataSource() {
         dataSource = UITableViewDiffableDataSource<Int, PropertyRepresentable>(tableView: tableView) { (tableView, indexPath, item) -> PropertyListCell? in
             let cell = tableView.dequeueReusableCell(withIdentifier: PropertyListCell.reuseId, for: indexPath) as? PropertyListCell
-            cell?.textLabel?.text = item.address
+            cell?.set(representable: item)
             return cell
         }
     }
