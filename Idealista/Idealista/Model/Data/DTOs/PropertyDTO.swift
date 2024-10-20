@@ -9,12 +9,9 @@ import Foundation
 
 struct PropertyDTO: Codable {
     let propertyCode: String
-    let thumbnail: String
-    let price: Double
     let priceInfo: PriceInfo
     let size: Double
     let rooms: Int
-    let bathrooms: Int
     let address: String
     let latitude: Double
     let longitude: Double
@@ -41,6 +38,6 @@ struct PriceInfo: Codable {
 }
 
 struct Price: Codable {
-    let amount: Int
+    let amount: Double
     let currencySuffix: String
 }

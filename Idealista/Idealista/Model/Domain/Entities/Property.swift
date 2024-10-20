@@ -11,8 +11,8 @@ struct Property {
     let id: String
     let imagesUrl: [String]
     let address: String
-    let price: Double
-    let currencySuffix: String
+    let priceAmount: Double
+    let priceCurrencySuffix: String
     let isParkingSpaceIncludedInPrice: Bool
     let rooms: Int
     let size: Double
