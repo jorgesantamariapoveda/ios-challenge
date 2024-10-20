@@ -8,12 +8,27 @@
 import Foundation
 
 protocol PropertyApiDataSource {
-    func execute() async throws -> [PropertyDTO]
+    func fetchAll() async throws -> [PropertyDTO]
 }
 
 final class PropertyApiDataSourceImpl: PropertyApiDataSource {
+    private let httpClient: HTTPClient
     
-    func execute() async throws -> [PropertyDTO] {
-        return []
+    init(httpClient: HTTPClient = URLSessionHTTPClient()) {
+        self.httpClient = httpClient
+    }
+    
+    func fetchAll() async throws -> [PropertyDTO] {
+        let data = try await httpClient.makeRequest(
+            baseUrl: Constants.API.baseURL,
+            path: "list.json",
+            method: .get
+        )
+        
+        guard let result = try? JSONDecoder().decode([PropertyDTO].self, from: data) else {
+            throw HTTPClientError.parsingError
+        }
+
+        return result
     }
 }

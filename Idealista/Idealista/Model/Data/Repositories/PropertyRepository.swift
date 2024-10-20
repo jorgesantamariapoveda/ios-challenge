@@ -24,7 +24,7 @@ final class PropertyRepositoryImpl: PropertyRepository {
     }
     
     func fetchAll() async throws -> [Property] {
-        let propertiesDTO = try await propertyApiDataSource.execute()
+        let propertiesDTO = try await propertyApiDataSource.fetchAll()
         return propertiesDTO.map { propertyMapper.map(from: $0) }
     }
 }
