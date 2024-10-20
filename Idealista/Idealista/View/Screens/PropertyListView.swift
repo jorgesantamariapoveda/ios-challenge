@@ -15,6 +15,13 @@ final class PropertyListView: UIView {
     
     weak var delegate: PropertyListViewDelegate?
     
+    private lazy var activityIndicator: UIActivityIndicatorView = {
+        let activityIndicator = UIActivityIndicatorView(style: .large)
+        activityIndicator.color = .idealistaPurple
+        activityIndicator.translatesAutoresizingMaskIntoConstraints = false
+        return activityIndicator
+    }()
+    
     private lazy var tableView: UITableView = {
         let tableView = UITableView(frame: .zero, style: .grouped)
         tableView.backgroundColor = UIColor.systemBackground
@@ -32,6 +39,8 @@ final class PropertyListView: UIView {
         
         addSubviews()
         addConstraints()
+        
+        activityIndicator.startAnimating()
         configureTableView()
     }
     
@@ -41,6 +50,7 @@ final class PropertyListView: UIView {
     
     private func addSubviews() {
         addSubview(tableView)
+        addSubview(activityIndicator)
     }
     
     private func addConstraints() {
@@ -49,6 +59,11 @@ final class PropertyListView: UIView {
             tableView.bottomAnchor.constraint(equalTo: bottomAnchor),
             tableView.leadingAnchor.constraint(equalTo: leadingAnchor),
             tableView.trailingAnchor.constraint(equalTo: trailingAnchor),
+        ])
+        
+        NSLayoutConstraint.activate([
+            activityIndicator.centerXAnchor.constraint(equalTo: centerXAnchor),
+            activityIndicator.centerYAnchor.constraint(equalTo: centerYAnchor),
         ])
     }
     
