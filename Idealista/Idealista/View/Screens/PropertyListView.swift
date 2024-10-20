@@ -88,9 +88,10 @@ final class PropertyListView: UIView {
         dataSource.apply(snapshot, animatingDifferences: animatingDifferences)
     }
     
-    func set(representable: PropertyRepresentable) {
-        data.append(representable)
+    func set(representable: [PropertyRepresentable]) {
+        representable.forEach { data.append($0) }
         applySnapshot()
+        activityIndicator.stopAnimating()
     }
 }
 

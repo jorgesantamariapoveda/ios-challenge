@@ -44,9 +44,7 @@ final class PropertyListViewController: UIViewController {
             do {
                 let propertyList = try await getPropertyListUseCase.execute()
                 let representable = propertyList.map { PropertyRepresentable(domainModel: $0) }
-                if let first = representable.first {
-                    propertyListView.set(representable: first)
-                }
+                propertyListView.set(representable: representable)
             } catch let error as HTTPClientError {
                 print(":: \(error)")
             } catch {
