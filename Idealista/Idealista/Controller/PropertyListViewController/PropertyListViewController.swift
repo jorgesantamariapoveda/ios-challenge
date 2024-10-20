@@ -9,19 +9,56 @@ import UIKit
 
 final class PropertyListViewController: UIViewController {
     
-    lazy var titleLabel: UILabel = {
-        let label = UILabel()
-        label.text = "Property List 2"
-        label.font = .systemFont(ofSize: .init(30))
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
-    }()
+    private var propertyListView = PropertyListView()
+    private var getPropertyListUseCase: GetPropertyListUseCase
     
-    lazy var titleLabelView = LabelView()
-
+    init(
+        propertyListView: PropertyListView = PropertyListView(),
+        getPropertyListUseCase: GetPropertyListUseCase = GetPropertyListUseCaseImpl()
+    ) {
+        self.propertyListView = propertyListView
+        self.getPropertyListUseCase = getPropertyListUseCase
+        
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .white
-        configView()
+     
+        addSubviews()
+        propertyListView.delegate = self
+        
+        loadData()
+    }
+    
+    private func addSubviews() {
+        self.view = propertyListView
+    }
+    
+    private func loadData() {
+        Task {
+            do {
+                let propertyList = try await getPropertyListUseCase.execute()
+                let representable = propertyList.map { PropertyRepresentable(domainModel: $0) }
+                if let first = representable.first {
+                    propertyListView.set(representable: first)
+                }
+            } catch let error as HTTPClientError {
+                print(":: \(error)")
+            } catch {
+                print(":: \(error.localizedDescription)")
+            }
+        }
+    }
+}
+
+extension PropertyListViewController: PropertyListViewDelegate {
+    func didSelect(property: PropertyRepresentable) {
+        let detailVC = PropertyDetailViewController(property: property)
+        navigationController?.pushViewController(detailVC, animated: true)
     }
 }
