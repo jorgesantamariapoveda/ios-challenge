@@ -10,3 +10,10 @@ import Foundation
 protocol PropertyApiDataSource {
     func execute() async throws -> [PropertyDTO]
 }
+
+final class PropertyApiDataSourceImpl: PropertyApiDataSource {
+    
+    func execute() async throws -> [PropertyDTO] {
+        return []
+    }
+}

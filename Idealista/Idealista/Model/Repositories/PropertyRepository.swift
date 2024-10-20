@@ -16,8 +16,8 @@ final class PropertyRepositoryImpl: PropertyRepository {
     let propertyMapper: PropertyMapper
     
     init(
-        propertyApiService: PropertyApiDataSource,
-        propertyMapper: PropertyMapper
+        propertyApiService: PropertyApiDataSource = PropertyApiDataSourceImpl(),
+        propertyMapper: PropertyMapper = PropertyMapperImpl()
     ) {
         self.propertyApiDataSource = propertyApiService
         self.propertyMapper = propertyMapper
