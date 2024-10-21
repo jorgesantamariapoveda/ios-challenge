@@ -9,15 +9,7 @@ import UIKit
 
 final class BottomButonView: UIView {
     
-    private lazy var stackView: UIStackView = {
-        let stackView = UIStackView()
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-        stackView.axis = .horizontal
-        stackView.spacing = 8
-        stackView.alignment = .center
-        stackView.distribution = .fillProportionally
-        return stackView
-    }()
+    private let stackView = HStackView(spacing: 8)
     
     private lazy var imageView: UIImageView = {
         let imageView = UIImageView()

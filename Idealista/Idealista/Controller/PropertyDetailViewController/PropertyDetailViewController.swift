@@ -24,13 +24,7 @@ final class PropertyDetailViewController: UIViewController {
         return contentView
     }()
     
-    private lazy var stackView: UIStackView = {
-        let stackView = UIStackView()
-        stackView.axis = .vertical
-        stackView.spacing = 8
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-        return stackView
-    }()
+    let stackView = VStackView()
     
     init(
         representable: PropertyRepresentable,

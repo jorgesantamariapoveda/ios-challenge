@@ -52,37 +52,21 @@ final class PropertyListViewCell: UITableViewCell {
     
     let priceLabelView = PriceLabelView()
     let isParkingSpaceIncludedInPriceLabelView = FootLabelView()
-    lazy var priceAndParkingStackView: UIStackView = {
-        let stackView = UIStackView()
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-        stackView.axis = .horizontal
-        stackView.spacing = 10
-        stackView.alignment = .center
-        stackView.distribution = .fillProportionally
-        return stackView
-    }()
+    let priceAndParkingStackView = HStackView(
+        alignment: .center,
+        distribution: .fillProportionally,
+        spacing: 10
+    )
     
     let roomsLabelView = FootLabelView()
     let sizeLabelView = FootLabelView()
-    lazy var roomsAndSizeStackView: UIStackView = {
-        let stackView = UIStackView()
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-        stackView.axis = .horizontal
-        stackView.spacing = 10
-        stackView.alignment = .center
-        stackView.distribution = .fillProportionally
-        return stackView
-    }()
+    let roomsAndSizeStackView = HStackView(
+        alignment: .center,
+        distribution: .fillProportionally,
+        spacing: 10
+    )
     
-    lazy var contentStackView: UIStackView = {
-        let stackView = UIStackView()
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-        stackView.axis = .vertical
-        stackView.spacing = 8
-        stackView.alignment = .leading
-        stackView.distribution = .fillProportionally
-        return stackView
-    }()
+    let contentStackView = VStackView(distribution: .fillProportionally, spacing: 8)
     
     // MARK: - HorizontalLine
     let horizontalLineView = HorizontalLineView()
@@ -91,37 +75,25 @@ final class PropertyListViewCell: UITableViewCell {
     let phoneBottomButonView = BottomButonView()
     let contactBottomButonView = BottomButonView()
     let spacerView = UIView()
-    lazy var bottomLeftButtonsStackView: UIStackView = {
-        let stackView = UIStackView()
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-        stackView.axis = .horizontal
-        stackView.spacing = 10
-        stackView.alignment = .center
-        stackView.distribution = .fillProportionally
-        return stackView
-    }()
+    let bottomLeftButtonsStackView = HStackView(
+        alignment: .center,
+        distribution: .fillProportionally,
+        spacing: 10
+    )
     
     let trashBottomButonView = BottomButonView()
     let favoriteBottomButonView = BottomButonView()
-    lazy var bottomRightButtonsStackView: UIStackView = {
-        let stackView = UIStackView()
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-        stackView.axis = .horizontal
-        stackView.spacing = 10
-        stackView.alignment = .center
-        stackView.distribution = .fillProportionally
-        return stackView
-    }()
+    let bottomRightButtonsStackView = HStackView(
+        alignment: .center,
+        distribution: .fillProportionally,
+        spacing: 10
+    )
     
-    lazy var footerStackView: UIStackView = {
-        let stackView = UIStackView()
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-        stackView.axis = .horizontal
-        stackView.spacing = 10
-        stackView.alignment = .center
-        stackView.distribution = .fillProportionally
-        return stackView
-    }()
+    let footerStackView = HStackView(
+        alignment: .center,
+        distribution: .fillProportionally,
+        spacing: 10
+    )
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
