@@ -31,7 +31,6 @@ final class PropertyListViewController: UIViewController {
      
         addSubviews()
         propertyListView.delegate = self
-        
         loadData()
     }
     
@@ -46,9 +45,9 @@ final class PropertyListViewController: UIViewController {
                 let representable = propertyList.map { PropertyRepresentable(domainModel: $0) }
                 propertyListView.set(representable: representable)
             } catch let error as HTTPClientError {
-                print(":: \(error)")
+                print("limit:: \(error)")
             } catch {
-                print(":: \(error.localizedDescription)")
+                print("limit:: \(error)")
             }
         }
     }

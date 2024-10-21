@@ -106,12 +106,10 @@ final class PropertyDetailViewController: UIViewController {
         Task {
             do {
                 let value = try await getDetailPropertyUseCase.execute()
-                
-                print(":: \(value)")
             } catch let error as HTTPClientError {
-                print(":: \(error)")
+                print("limit:: \(error)")
             } catch {
-                print(":: \(error.localizedDescription)")
+                print("limit:: \(error)")
             }
         }
     }

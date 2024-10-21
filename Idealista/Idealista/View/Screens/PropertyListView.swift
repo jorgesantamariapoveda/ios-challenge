@@ -41,6 +41,7 @@ final class PropertyListView: UIView {
         addConstraints()
         
         activityIndicator.startAnimating()
+        
         configureTableView()
     }
     
@@ -91,8 +92,10 @@ final class PropertyListView: UIView {
     }
     
     func set(representable: [PropertyRepresentable]) {
-        representable.forEach { data.append($0) }
+        data.removeAll()
+        data.append(contentsOf: representable)
         applySnapshot()
+        
         activityIndicator.stopAnimating()
     }
 }
