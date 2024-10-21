@@ -20,6 +20,23 @@ final class PropertyListViewCell: UITableViewCell {
         return view
     }()
     
+    private lazy var collectionView: UICollectionView = {
+        let layout = UICollectionViewFlowLayout()
+        layout.scrollDirection = .horizontal
+        layout.minimumLineSpacing = 5
+        layout.minimumInteritemSpacing = 0
+        layout.itemSize = CGSize(width: UIScreen.main.bounds.width, height: 200)
+        
+        let collectionView = UICollectionView(frame: contentView.bounds, collectionViewLayout: layout)
+        collectionView.backgroundColor = .clear
+        collectionView.showsHorizontalScrollIndicator = false
+        collectionView.register(ImageCell.self, forCellWithReuseIdentifier: ImageCell.reuseId)
+        collectionView.translatesAutoresizingMaskIntoConstraints = false
+        
+        return collectionView
+    }()
+    private var dataSource: UICollectionViewDiffableDataSource<Int, String>!
+    
     // MARK: - Content
     private let addressLabelView = AddressLabelView()
     
@@ -95,7 +112,7 @@ final class PropertyListViewCell: UITableViewCell {
         stackView.distribution = .fillProportionally
         return stackView
     }()
-
+    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
@@ -103,6 +120,8 @@ final class PropertyListViewCell: UITableViewCell {
         
         addSubviews()
         addConstraints()
+        
+        configureDataSource()
     }
     
     required init?(coder: NSCoder) {
@@ -111,6 +130,7 @@ final class PropertyListViewCell: UITableViewCell {
     
     private func addSubviews() {
         contentView.addSubview(containerView)
+        containerView.addSubview(collectionView)
         containerView.addSubview(contentStackView)
         containerView.addSubview(horizontalLineView)
         containerView.addSubview(footerStackView)
@@ -138,29 +158,36 @@ final class PropertyListViewCell: UITableViewCell {
     
     private func addConstraints() {
         NSLayoutConstraint.activate([
-            containerView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10),
-            containerView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 10),
-            containerView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -10),
-            containerView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -10),
+            containerView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 8),
+            containerView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 8),
+            containerView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -8),
+            containerView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -8),
         ])
         
         NSLayoutConstraint.activate([
-            contentStackView.topAnchor.constraint(equalTo: containerView.topAnchor),
-            contentStackView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 10),
-            contentStackView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -10),
+            collectionView.topAnchor.constraint(equalTo: containerView.topAnchor),
+            collectionView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor),
+            collectionView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor),
+            collectionView.heightAnchor.constraint(equalToConstant: 200),
+        ])
+
+        NSLayoutConstraint.activate([
+            contentStackView.topAnchor.constraint(equalTo: collectionView.bottomAnchor, constant: 8),
+            contentStackView.leadingAnchor.constraint(equalTo: collectionView.leadingAnchor, constant: 8),
+            contentStackView.trailingAnchor.constraint(equalTo: collectionView.trailingAnchor, constant: -8),
         ])
         
         NSLayoutConstraint.activate([
-            horizontalLineView.topAnchor.constraint(equalTo: contentStackView.bottomAnchor, constant: 10),
+            horizontalLineView.topAnchor.constraint(equalTo: contentStackView.bottomAnchor, constant: 8),
             horizontalLineView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor),
             horizontalLineView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor)
         ])
         
         NSLayoutConstraint.activate([
-            footerStackView.topAnchor.constraint(equalTo: horizontalLineView.bottomAnchor, constant: 10),
+            footerStackView.topAnchor.constraint(equalTo: horizontalLineView.bottomAnchor, constant: 8),
             footerStackView.leadingAnchor.constraint(equalTo: contentStackView.leadingAnchor),
             footerStackView.trailingAnchor.constraint(equalTo: contentStackView.trailingAnchor),
-            footerStackView.bottomAnchor.constraint(equalTo: containerView.bottomAnchor, constant: -10)
+            footerStackView.bottomAnchor.constraint(equalTo: containerView.bottomAnchor, constant: -8)
         ])
     }
     
@@ -181,5 +208,26 @@ final class PropertyListViewCell: UITableViewCell {
         
         trashBottomButonView.set(imageSystemName: "trash")
         favoriteBottomButonView.set(imageSystemName: "heart")
+        
+        applySnapshot(with: representable.imagesUrl)
+    }
+    
+    private func configureDataSource() {
+        dataSource = UICollectionViewDiffableDataSource<Int, String>(collectionView: collectionView) {
+            (collectionView, indexPath, imageUrl) -> UICollectionViewCell? in
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ImageCell", for: indexPath) as! ImageCell
+            
+            if let url = URL(string: imageUrl) {
+                cell.set(with: url)
+            }
+            return cell
+        }
+    }
+    
+    private func applySnapshot(with imageUrls: [String]) {
+        var snapshot = NSDiffableDataSourceSnapshot<Int, String>()
+        snapshot.appendSections([0])
+        snapshot.appendItems(imageUrls)
+        dataSource.apply(snapshot, animatingDifferences: true)
     }
 }
