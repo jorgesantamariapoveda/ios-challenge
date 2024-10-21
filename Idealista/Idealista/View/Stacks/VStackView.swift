@@ -8,12 +8,14 @@
 import UIKit
 
 final class VStackView: UIStackView {
+    
     init(
         alignment: UIStackView.Alignment = .fill,
         distribution: UIStackView.Distribution = .fill,
         spacing: CGFloat = 0
     ) {
         super.init(frame: .zero)
+        
         self.axis = .vertical
         self.alignment = alignment
         self.distribution = distribution
