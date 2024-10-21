@@ -9,14 +9,14 @@ import UIKit
 
 final class PropertyDetailViewController: UIViewController {
     
-    private let property: PropertyRepresentable
+    private let representable: PropertyRepresentable
     private var getDetailPropertyUseCase: GetDetailPropertyUseCase
     
     init(
-        property: PropertyRepresentable,
+        representable: PropertyRepresentable,
         getDetailPropertyUseCase: GetDetailPropertyUseCase = GetDetailPropertyUseCaseImpl()
     ) {
-        self.property = property
+        self.representable = representable
         self.getDetailPropertyUseCase = getDetailPropertyUseCase
         
         super.init(nibName: nil, bundle: nil)

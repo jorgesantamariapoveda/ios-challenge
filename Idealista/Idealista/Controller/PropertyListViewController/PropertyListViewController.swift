@@ -55,8 +55,8 @@ final class PropertyListViewController: UIViewController {
 }
 
 extension PropertyListViewController: PropertyListViewDelegate {
-    func didSelect(property: PropertyRepresentable) {
-        let detailVC = PropertyDetailViewController(property: property)
+    func didSelect(representable: PropertyRepresentable) {
+        let detailVC = PropertyDetailViewController(representable: representable)
         navigationController?.pushViewController(detailVC, animated: true)
     }
 }

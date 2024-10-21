@@ -7,9 +7,17 @@
 
 import UIKit
 
+protocol PropertyListViewCellDelegate: AnyObject {
+    func didSelect(representable: PropertyRepresentable)
+}
+
 final class PropertyListViewCell: UITableViewCell {
     
     static let reuseId = "PropertyListCell"
+    
+    weak var delegate: PropertyListViewCellDelegate?
+    
+    private var representable: PropertyRepresentable?
     
     private let containerView: UIView = {
         let view = UIView()
@@ -32,6 +40,8 @@ final class PropertyListViewCell: UITableViewCell {
         collectionView.showsHorizontalScrollIndicator = false
         collectionView.register(ImageCell.self, forCellWithReuseIdentifier: ImageCell.reuseId)
         collectionView.translatesAutoresizingMaskIntoConstraints = false
+        
+        collectionView.delegate = self
         
         return collectionView
     }()
@@ -191,7 +201,28 @@ final class PropertyListViewCell: UITableViewCell {
         ])
     }
     
+    private func configureDataSource() {
+        dataSource = UICollectionViewDiffableDataSource<Int, String>(collectionView: collectionView) {
+            (collectionView, indexPath, imageUrl) -> UICollectionViewCell? in
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ImageCell", for: indexPath) as! ImageCell
+            
+            if let url = URL(string: imageUrl) {
+                cell.set(with: url)
+            }
+            return cell
+        }
+    }
+    
+    private func applySnapshot(with imageUrls: [String]) {
+        var snapshot = NSDiffableDataSourceSnapshot<Int, String>()
+        snapshot.appendSections([0])
+        snapshot.appendItems(imageUrls)
+        dataSource.apply(snapshot, animatingDifferences: true)
+    }
+    
     func set(representable: PropertyRepresentable) {
+        self.representable = representable
+        
         addressLabelView.set(text: representable.address)
         priceLabelView.set(text: representable.price)
         
@@ -211,23 +242,12 @@ final class PropertyListViewCell: UITableViewCell {
         
         applySnapshot(with: representable.imagesUrl)
     }
-    
-    private func configureDataSource() {
-        dataSource = UICollectionViewDiffableDataSource<Int, String>(collectionView: collectionView) {
-            (collectionView, indexPath, imageUrl) -> UICollectionViewCell? in
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ImageCell", for: indexPath) as! ImageCell
-            
-            if let url = URL(string: imageUrl) {
-                cell.set(with: url)
-            }
-            return cell
-        }
-    }
-    
-    private func applySnapshot(with imageUrls: [String]) {
-        var snapshot = NSDiffableDataSourceSnapshot<Int, String>()
-        snapshot.appendSections([0])
-        snapshot.appendItems(imageUrls)
-        dataSource.apply(snapshot, animatingDifferences: true)
+}
+
+// MARK: - UICollectionViewDelegate
+extension PropertyListViewCell: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        guard let representable else { return }
+        delegate?.didSelect(representable: representable)
     }
 }

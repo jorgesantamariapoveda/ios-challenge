@@ -8,7 +8,7 @@
 import UIKit
 
 protocol PropertyListViewDelegate: AnyObject {
-    func didSelect(property: PropertyRepresentable)
+    func didSelect(representable: PropertyRepresentable)
 }
 
 final class PropertyListView: UIView {
@@ -74,9 +74,11 @@ final class PropertyListView: UIView {
     }
 
     private func configureDataSource() {
-        dataSource = UITableViewDiffableDataSource<Int, PropertyRepresentable>(tableView: tableView) { (tableView, indexPath, item) -> PropertyListViewCell? in
+        dataSource = UITableViewDiffableDataSource<Int, PropertyRepresentable>(tableView: tableView) {
+            (tableView, indexPath, item) -> PropertyListViewCell? in
             let cell = tableView.dequeueReusableCell(withIdentifier: PropertyListViewCell.reuseId, for: indexPath) as? PropertyListViewCell
             cell?.set(representable: item)
+            cell?.delegate = self
             return cell
         }
     }
@@ -95,9 +97,16 @@ final class PropertyListView: UIView {
     }
 }
 
+// MARK: - UITableViewDelegate
 extension PropertyListView: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let property = data[indexPath.row]
-        delegate?.didSelect(property: property)
+        let representable = data[indexPath.row]
+        delegate?.didSelect(representable: representable)
+    }
+}
+
+extension PropertyListView: PropertyListViewCellDelegate {
+    func didSelect(representable: PropertyRepresentable) {
+        delegate?.didSelect(representable: representable)
     }
 }
