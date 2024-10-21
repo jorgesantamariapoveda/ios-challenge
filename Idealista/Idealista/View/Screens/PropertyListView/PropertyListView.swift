@@ -15,14 +15,14 @@ final class PropertyListView: UIView {
     
     weak var delegate: PropertyListViewDelegate?
     
-    private lazy var activityIndicator: UIActivityIndicatorView = {
+    lazy var activityIndicator: UIActivityIndicatorView = {
         let activityIndicator = UIActivityIndicatorView(style: .large)
         activityIndicator.color = .idealistaPurple
         activityIndicator.translatesAutoresizingMaskIntoConstraints = false
         return activityIndicator
     }()
     
-    private lazy var tableView: UITableView = {
+    lazy var tableView: UITableView = {
         let tableView = UITableView(frame: .zero, style: .grouped)
         tableView.backgroundColor = UIColor.systemBackground
         tableView.register(PropertyListViewCell.self, forCellReuseIdentifier: PropertyListViewCell.reuseId)
@@ -37,8 +37,7 @@ final class PropertyListView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        addSubviews()
-        addConstraints()
+        configureViews()
         
         activityIndicator.startAnimating()
         
@@ -47,25 +46,6 @@ final class PropertyListView: UIView {
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
-    }
-    
-    private func addSubviews() {
-        addSubview(tableView)
-        addSubview(activityIndicator)
-    }
-    
-    private func addConstraints() {
-        NSLayoutConstraint.activate([
-            tableView.topAnchor.constraint(equalTo: topAnchor),
-            tableView.bottomAnchor.constraint(equalTo: bottomAnchor),
-            tableView.leadingAnchor.constraint(equalTo: leadingAnchor),
-            tableView.trailingAnchor.constraint(equalTo: trailingAnchor),
-        ])
-        
-        NSLayoutConstraint.activate([
-            activityIndicator.centerXAnchor.constraint(equalTo: centerXAnchor),
-            activityIndicator.centerYAnchor.constraint(equalTo: centerYAnchor),
-        ])
     }
     
     private func configureTableView() {
@@ -108,6 +88,7 @@ extension PropertyListView: UITableViewDelegate {
     }
 }
 
+// MARK: - PropertyListViewCellDelegate
 extension PropertyListView: PropertyListViewCellDelegate {
     func didSelect(representable: PropertyRepresentable) {
         delegate?.didSelect(representable: representable)
