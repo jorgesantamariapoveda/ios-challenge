@@ -19,7 +19,7 @@ final class PropertyListViewCell: UITableViewCell {
     
     private var representable: PropertyRepresentable?
     
-    private let containerView: UIView = {
+    let containerView: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
         view.backgroundColor = .clear
@@ -28,7 +28,7 @@ final class PropertyListViewCell: UITableViewCell {
         return view
     }()
     
-    private lazy var collectionView: UICollectionView = {
+    lazy var carruselCollectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
         layout.minimumLineSpacing = 5
@@ -48,11 +48,11 @@ final class PropertyListViewCell: UITableViewCell {
     private var dataSource: UICollectionViewDiffableDataSource<Int, String>!
     
     // MARK: - Content
-    private let addressLabelView = AddressLabelView()
+    let addressLabelView = AddressLabelView()
     
-    private let priceLabelView = PriceLabelView()
-    private let isParkingSpaceIncludedInPriceLabelView = FootLabelView()
-    private lazy var priceAndParkingStackView: UIStackView = {
+    let priceLabelView = PriceLabelView()
+    let isParkingSpaceIncludedInPriceLabelView = FootLabelView()
+    lazy var priceAndParkingStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.axis = .horizontal
@@ -62,9 +62,9 @@ final class PropertyListViewCell: UITableViewCell {
         return stackView
     }()
     
-    private let roomsLabelView = FootLabelView()
-    private let sizeLabelView = FootLabelView()
-    private lazy var roomsAndSizeStackView: UIStackView = {
+    let roomsLabelView = FootLabelView()
+    let sizeLabelView = FootLabelView()
+    lazy var roomsAndSizeStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.axis = .horizontal
@@ -74,7 +74,7 @@ final class PropertyListViewCell: UITableViewCell {
         return stackView
     }()
     
-    private lazy var contentStackView: UIStackView = {
+    lazy var contentStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.axis = .vertical
@@ -85,13 +85,13 @@ final class PropertyListViewCell: UITableViewCell {
     }()
     
     // MARK: - HorizontalLine
-    private let horizontalLineView = HorizontalLineView()
+    let horizontalLineView = HorizontalLineView()
     
     // MARK: - Footer
-    private let phoneBottomButonView = BottomButonView()
-    private let contactBottomButonView = BottomButonView()
-    private let spacerView = UIView()
-    private lazy var bottomLeftButtonsStackView: UIStackView = {
+    let phoneBottomButonView = BottomButonView()
+    let contactBottomButonView = BottomButonView()
+    let spacerView = UIView()
+    lazy var bottomLeftButtonsStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.axis = .horizontal
@@ -101,9 +101,9 @@ final class PropertyListViewCell: UITableViewCell {
         return stackView
     }()
     
-    private let trashBottomButonView = BottomButonView()
-    private let favoriteBottomButonView = BottomButonView()
-    private lazy var bottomRightButtonsStackView: UIStackView = {
+    let trashBottomButonView = BottomButonView()
+    let favoriteBottomButonView = BottomButonView()
+    lazy var bottomRightButtonsStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.axis = .horizontal
@@ -113,7 +113,7 @@ final class PropertyListViewCell: UITableViewCell {
         return stackView
     }()
     
-    private lazy var footerStackView: UIStackView = {
+    lazy var footerStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.axis = .horizontal
@@ -127,10 +127,7 @@ final class PropertyListViewCell: UITableViewCell {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
         selectionStyle = .none
-        
-        addSubviews()
-        addConstraints()
-        
+        configureViews()
         configureDataSource()
     }
     
@@ -138,71 +135,8 @@ final class PropertyListViewCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    private func addSubviews() {
-        contentView.addSubview(containerView)
-        containerView.addSubview(collectionView)
-        containerView.addSubview(contentStackView)
-        containerView.addSubview(horizontalLineView)
-        containerView.addSubview(footerStackView)
-        
-        contentStackView.addArrangedSubview(addressLabelView)
-        contentStackView.addArrangedSubview(priceAndParkingStackView)
-        contentStackView.addArrangedSubview(roomsAndSizeStackView)
-        
-        priceAndParkingStackView.addArrangedSubview(priceLabelView)
-        priceAndParkingStackView.addArrangedSubview(isParkingSpaceIncludedInPriceLabelView)
-        
-        roomsAndSizeStackView.addArrangedSubview(roomsLabelView)
-        roomsAndSizeStackView.addArrangedSubview(sizeLabelView)
-        
-        footerStackView.addArrangedSubview(bottomLeftButtonsStackView)
-        footerStackView.addArrangedSubview(bottomRightButtonsStackView)
-        
-        bottomLeftButtonsStackView.addArrangedSubview(phoneBottomButonView)
-        bottomLeftButtonsStackView.addArrangedSubview(contactBottomButonView)
-        bottomLeftButtonsStackView.addArrangedSubview(spacerView)
-        
-        bottomRightButtonsStackView.addArrangedSubview(trashBottomButonView)
-        bottomRightButtonsStackView.addArrangedSubview(favoriteBottomButonView)
-    }
-    
-    private func addConstraints() {
-        NSLayoutConstraint.activate([
-            containerView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 8),
-            containerView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 8),
-            containerView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -8),
-            containerView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -8),
-        ])
-        
-        NSLayoutConstraint.activate([
-            collectionView.topAnchor.constraint(equalTo: containerView.topAnchor),
-            collectionView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor),
-            collectionView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor),
-            collectionView.heightAnchor.constraint(equalToConstant: 200),
-        ])
-
-        NSLayoutConstraint.activate([
-            contentStackView.topAnchor.constraint(equalTo: collectionView.bottomAnchor, constant: 8),
-            contentStackView.leadingAnchor.constraint(equalTo: collectionView.leadingAnchor, constant: 8),
-            contentStackView.trailingAnchor.constraint(equalTo: collectionView.trailingAnchor, constant: -8),
-        ])
-        
-        NSLayoutConstraint.activate([
-            horizontalLineView.topAnchor.constraint(equalTo: contentStackView.bottomAnchor, constant: 8),
-            horizontalLineView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor),
-            horizontalLineView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor)
-        ])
-        
-        NSLayoutConstraint.activate([
-            footerStackView.topAnchor.constraint(equalTo: horizontalLineView.bottomAnchor, constant: 8),
-            footerStackView.leadingAnchor.constraint(equalTo: contentStackView.leadingAnchor),
-            footerStackView.trailingAnchor.constraint(equalTo: contentStackView.trailingAnchor),
-            footerStackView.bottomAnchor.constraint(equalTo: containerView.bottomAnchor, constant: -8)
-        ])
-    }
-    
     private func configureDataSource() {
-        dataSource = UICollectionViewDiffableDataSource<Int, String>(collectionView: collectionView) {
+        dataSource = UICollectionViewDiffableDataSource<Int, String>(collectionView: carruselCollectionView) {
             (collectionView, indexPath, imageUrl) -> UICollectionViewCell? in
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ImageCell", for: indexPath) as! ImageCell
             
