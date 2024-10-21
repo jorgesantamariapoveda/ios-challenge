@@ -105,7 +105,7 @@ final class PropertyDetailViewController: UIViewController {
     private func loadData() {
         Task {
             do {
-                let value = try await getDetailPropertyUseCase.execute()
+                let _ = try await getDetailPropertyUseCase.execute()
             } catch let error as HTTPClientError {
                 print("limit:: \(error)")
             } catch {
