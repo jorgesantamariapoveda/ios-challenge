@@ -30,8 +30,11 @@ extension PropertyDetailViewController {
         detailButtonsStackView.addArrangedSubview(shareButtonView)
         stackView.addArrangedSubview(detailButtonsStackView)
         
-        stackView.addArrangedSubview(commentLabelView)
+        stackView.addArrangedSubview(titleCommentLabelView)
+        stackView.addArrangedSubview(descCommentLabelView)
+        
         stackView.addArrangedSubview(titleBasicCharacteristicsLabelView)
+        
         stackView.addArrangedSubview(descBasicCharacteristicsLabelView)
         stackView.addArrangedSubview(energyCertificationLabelView)
     }

@@ -46,7 +46,8 @@ final class PropertyDetailViewController: UIViewController {
         spacing: 10
     )
     
-    let commentLabelView = BoldLabelView()
+    let titleCommentLabelView = BoldLabelView()
+    let descCommentLabelView = CommentDetailLabelView()
     let titleBasicCharacteristicsLabelView = BoldLabelView()
     let descBasicCharacteristicsLabelView = NormalDetailLabelView()
     let energyCertificationLabelView = BoldLabelView()
@@ -85,7 +86,7 @@ final class PropertyDetailViewController: UIViewController {
         discardButtonView.set(text: "Descartar", imageSystemName: "trash")
         shareButtonView.set(text: "Compartir", imageSystemName: "square.and.arrow.up")
         
-        commentLabelView.set(text: "Comentario del anunciante")
+        titleCommentLabelView.set(text: "Comentario del anunciante")
         titleBasicCharacteristicsLabelView.set(text: "Características básicas")
         energyCertificationLabelView.set(text: "Certificado energético")
         
@@ -105,7 +106,8 @@ final class PropertyDetailViewController: UIViewController {
     private func loadData() {
         Task {
             do {
-                let _ = try await getDetailPropertyUseCase.execute()
+                let detailProperty = try await getDetailPropertyUseCase.execute()
+                descCommentLabelView.set(text: detailProperty.description)
             } catch let error as HTTPClientError {
                 print("limit:: \(error)")
             } catch {
