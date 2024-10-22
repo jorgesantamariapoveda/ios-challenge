@@ -18,6 +18,22 @@ extension PropertyDetailViewController {
         view.addSubview(scrollView)
         scrollView.addSubview(contentView)
         contentView.addSubview(stackView)
+        stackView.addArrangedSubview(addressLabelView)
+        stackView.addArrangedSubview(priceLabelView)
+        
+        roomsAndSizeStackView.addArrangedSubview(roomsLabelView)
+        roomsAndSizeStackView.addArrangedSubview(sizeLabelView)
+        stackView.addArrangedSubview(roomsAndSizeStackView)
+        
+        detailButtonsStackView.addArrangedSubview(favoriteButtonView)
+        detailButtonsStackView.addArrangedSubview(discardButtonView)
+        detailButtonsStackView.addArrangedSubview(shareButtonView)
+        stackView.addArrangedSubview(detailButtonsStackView)
+        
+        stackView.addArrangedSubview(commentLabelView)
+        stackView.addArrangedSubview(titleBasicCharacteristicsLabelView)
+        stackView.addArrangedSubview(descBasicCharacteristicsLabelView)
+        stackView.addArrangedSubview(energyCertificationLabelView)
     }
     
     private func addConstraints() {

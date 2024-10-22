@@ -26,6 +26,31 @@ final class PropertyDetailViewController: UIViewController {
     
     let stackView = VStackView()
     
+    let addressLabelView = AddressDetailLabelView()
+    let priceLabelView = BoldLabelView()
+    
+    let roomsLabelView = FootLabelView()
+    let sizeLabelView = FootLabelView()
+    let roomsAndSizeStackView = HStackView(
+        alignment: .center,
+        distribution: .fill,
+        spacing: 10
+    )
+    
+    let favoriteButtonView = DetailButtonView()
+    let discardButtonView = DetailButtonView()
+    let shareButtonView = DetailButtonView()
+    let detailButtonsStackView = HStackView(
+        alignment: .center,
+        distribution: .fillEqually,
+        spacing: 10
+    )
+    
+    let commentLabelView = BoldLabelView()
+    let titleBasicCharacteristicsLabelView = BoldLabelView()
+    let descBasicCharacteristicsLabelView = NormalDetailLabelView()
+    let energyCertificationLabelView = BoldLabelView()
+    
     init(
         representable: PropertyRepresentable,
         getDetailPropertyUseCase: GetDetailPropertyUseCase = GetDetailPropertyUseCaseImpl()
@@ -47,22 +72,34 @@ final class PropertyDetailViewController: UIViewController {
         title = "Detalle"
         
         configureViews()
-        
-        setupSubviews()
+        setupViews()
         loadData()
     }
     
-    //!! Review 🔴
-    private func setupSubviews() {
-        for i in 0..<50 {
-            let label = UILabel()
-            label.text = "Label \(i + 1)"
-            label.translatesAutoresizingMaskIntoConstraints = false
-            label.textAlignment = .center
-            label.backgroundColor = .lightGray
-            
-            stackView.addArrangedSubview(label)
-        }
+    private func setupViews() {
+        addressLabelView.set(text: representable.address)
+        priceLabelView.set(text: representable.price)
+        roomsLabelView.set(text: representable.rooms)
+        sizeLabelView.set(text: representable.size)
+        favoriteButtonView.set(text: "Guardar", imageSystemName: "heart")
+        discardButtonView.set(text: "Descartar", imageSystemName: "trash")
+        shareButtonView.set(text: "Compartir", imageSystemName: "square.and.arrow.up")
+        
+        commentLabelView.set(text: "Comentario del anunciante")
+        titleBasicCharacteristicsLabelView.set(text: "Características básicas")
+        energyCertificationLabelView.set(text: "Certificado energético")
+        
+        let basicCharacteristics = """
+        · 3 habitaciones
+        · 2 baños
+        · Terraza
+        · Plaza de garaje incluida en el precio
+        · Orientación sur
+        · Construido en 2008
+        · Segunda mano/buen estado
+        · Calefacción individual: Bomba de frí/calor
+        """
+        descBasicCharacteristicsLabelView.set(text: basicCharacteristics)
     }
     
     private func loadData() {
