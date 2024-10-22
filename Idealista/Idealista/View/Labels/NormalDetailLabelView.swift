@@ -23,7 +23,7 @@ final class NormalDetailLabelView: UILabel {
         textAlignment = .left
         font = .preferredFont(forTextStyle: .footnote)
         textColor = .black
-        numberOfLines = 0
+        numberOfLines = 1
     }
     
     func set(text: String) {
