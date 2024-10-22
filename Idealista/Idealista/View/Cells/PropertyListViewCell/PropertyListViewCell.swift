@@ -51,7 +51,7 @@ final class PropertyListViewCell: UITableViewCell {
     // MARK: - Content
     let addressLabelView = AddressLabelView()
     
-    let priceLabelView = PriceLabelView()
+    let priceLabelView = BoldLabelView()
     let isParkingSpaceIncludedInPriceLabelView = FootLabelView()
     
     let roomsLabelView = FootLabelView()

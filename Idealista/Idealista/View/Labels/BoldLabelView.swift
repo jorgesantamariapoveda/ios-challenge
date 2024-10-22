@@ -1,5 +1,5 @@
 //
-//  PriceLabelView.swift
+//  BoldLabelView.swift
 //  Idealista
 //
 //  Created by Jorge on 20/10/24.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class PriceLabelView: UILabel {
+final class BoldLabelView: UILabel {
 
     required init() {
         super.init(frame: .zero)
