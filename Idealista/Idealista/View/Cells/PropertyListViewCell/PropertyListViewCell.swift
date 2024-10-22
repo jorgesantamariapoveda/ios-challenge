@@ -28,6 +28,7 @@ final class PropertyListViewCell: UITableViewCell {
         return view
     }()
     
+    // MARK: - Carrusel
     lazy var carruselCollectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
@@ -74,7 +75,6 @@ final class PropertyListViewCell: UITableViewCell {
     // MARK: - Footer
     let phoneBottomButonView = BottomButonView()
     let contactBottomButonView = BottomButonView()
-    let spacerView = UIView()
     let bottomLeftButtonsStackView = HStackView(
         alignment: .center,
         distribution: .fillProportionally,

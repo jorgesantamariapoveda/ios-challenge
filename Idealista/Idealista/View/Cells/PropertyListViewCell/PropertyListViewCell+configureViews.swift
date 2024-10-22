@@ -36,7 +36,6 @@ extension PropertyListViewCell {
         
         bottomLeftButtonsStackView.addArrangedSubview(phoneBottomButonView)
         bottomLeftButtonsStackView.addArrangedSubview(contactBottomButonView)
-        bottomLeftButtonsStackView.addArrangedSubview(spacerView)
         
         bottomRightButtonsStackView.addArrangedSubview(trashBottomButonView)
         bottomRightButtonsStackView.addArrangedSubview(favoriteBottomButonView)

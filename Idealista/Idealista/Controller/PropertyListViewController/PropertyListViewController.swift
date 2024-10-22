@@ -10,13 +10,12 @@ import UIKit
 final class PropertyListViewController: UIViewController {
     
     private var propertyListView = PropertyListView()
+    
     private var getPropertyListUseCase: GetPropertyListUseCase
     
     init(
-        propertyListView: PropertyListView = PropertyListView(),
         getPropertyListUseCase: GetPropertyListUseCase = GetPropertyListUseCaseImpl()
     ) {
-        self.propertyListView = propertyListView
         self.getPropertyListUseCase = getPropertyListUseCase
         
         super.init(nibName: nil, bundle: nil)
