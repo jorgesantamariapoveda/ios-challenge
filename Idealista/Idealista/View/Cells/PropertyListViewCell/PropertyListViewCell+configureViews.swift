@@ -18,18 +18,14 @@ extension PropertyListViewCell {
         contentView.addSubview(containerView)
         containerView.addSubview(carruselCollectionView)
         containerView.addSubview(contentStackView)
+        containerView.addSubview(priceLabelView)
+        containerView.addSubview(isParkingSpaceIncludedInPriceLabelView)
+        containerView.addSubview(roomsLabelView)
+        containerView.addSubview(sizeLabelView)
         containerView.addSubview(horizontalLineView)
         containerView.addSubview(footerStackView)
         
         contentStackView.addArrangedSubview(addressLabelView)
-        contentStackView.addArrangedSubview(priceAndParkingStackView)
-        contentStackView.addArrangedSubview(roomsAndSizeStackView)
-        
-        priceAndParkingStackView.addArrangedSubview(priceLabelView)
-        priceAndParkingStackView.addArrangedSubview(isParkingSpaceIncludedInPriceLabelView)
-        
-        roomsAndSizeStackView.addArrangedSubview(roomsLabelView)
-        roomsAndSizeStackView.addArrangedSubview(sizeLabelView)
         
         footerStackView.addArrangedSubview(bottomLeftButtonsStackView)
         footerStackView.addArrangedSubview(bottomRightButtonsStackView)
@@ -63,7 +59,30 @@ extension PropertyListViewCell {
         ])
         
         NSLayoutConstraint.activate([
-            horizontalLineView.topAnchor.constraint(equalTo: contentStackView.bottomAnchor, constant: 8),
+            priceLabelView.topAnchor.constraint(equalTo: contentStackView.bottomAnchor, constant: 8),
+            priceLabelView.leadingAnchor.constraint(equalTo: contentStackView.leadingAnchor),
+        ])
+        
+        NSLayoutConstraint.activate([
+            isParkingSpaceIncludedInPriceLabelView.topAnchor.constraint(equalTo: contentStackView.bottomAnchor, constant: 8),
+            isParkingSpaceIncludedInPriceLabelView.leadingAnchor.constraint(equalTo: priceLabelView.trailingAnchor, constant: 8),
+            isParkingSpaceIncludedInPriceLabelView.trailingAnchor.constraint(lessThanOrEqualTo: contentStackView.trailingAnchor, constant: -8),
+            isParkingSpaceIncludedInPriceLabelView.centerYAnchor.constraint(equalTo: priceLabelView.centerYAnchor)
+        ])
+
+        NSLayoutConstraint.activate([
+            roomsLabelView.topAnchor.constraint(equalTo: priceLabelView.bottomAnchor, constant: 8),
+            roomsLabelView.leadingAnchor.constraint(equalTo: contentStackView.leadingAnchor),
+        ])
+        
+        NSLayoutConstraint.activate([
+            sizeLabelView.topAnchor.constraint(equalTo: roomsLabelView.topAnchor),
+            sizeLabelView.leadingAnchor.constraint(equalTo: roomsLabelView.trailingAnchor, constant: 8),
+            sizeLabelView.trailingAnchor.constraint(lessThanOrEqualTo: contentStackView.trailingAnchor, constant: -8),
+        ])
+        
+        NSLayoutConstraint.activate([
+            horizontalLineView.topAnchor.constraint(equalTo: roomsLabelView.bottomAnchor, constant: 8),
             horizontalLineView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor),
             horizontalLineView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor)
         ])
