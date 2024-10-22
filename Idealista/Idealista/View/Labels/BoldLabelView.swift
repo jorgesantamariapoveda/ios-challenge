@@ -21,7 +21,7 @@ final class BoldLabelView: UILabel {
     private func configureView() {
         translatesAutoresizingMaskIntoConstraints = false
         textAlignment = .left
-        font = UIFont.boldSystemFont(ofSize: UIFont.preferredFont(forTextStyle: .body).pointSize)
+        font = UIFont.boldSystemFont(ofSize: UIFont.preferredFont(forTextStyle: .title3).pointSize)
         textColor = .black
     }
     
