@@ -53,19 +53,9 @@ final class PropertyListViewCell: UITableViewCell {
     
     let priceLabelView = PriceLabelView()
     let isParkingSpaceIncludedInPriceLabelView = FootLabelView()
-    let priceAndParkingStackView = HStackView(
-        alignment: .center,
-        distribution: .fillProportionally,
-        spacing: 10
-    )
     
     let roomsLabelView = FootLabelView()
     let sizeLabelView = FootLabelView()
-    let roomsAndSizeStackView = HStackView(
-        alignment: .center,
-        distribution: .fillProportionally,
-        spacing: 10
-    )
     
     let contentStackView = VStackView(distribution: .fillProportionally, spacing: 8)
     
@@ -73,16 +63,16 @@ final class PropertyListViewCell: UITableViewCell {
     let horizontalLineView = HorizontalLineView()
     
     // MARK: - Footer
-    let phoneBottomButonView = BottomButonView()
-    let contactBottomButonView = BottomButonView()
+    let phoneBottomButonView = BottomButtonView()
+    let contactBottomButonView = BottomButtonView()
     let bottomLeftButtonsStackView = HStackView(
         alignment: .center,
         distribution: .fillProportionally,
         spacing: 10
     )
     
-    let trashBottomButonView = BottomButonView()
-    let favoriteBottomButonView = BottomButonView()
+    let trashBottomButonView = BottomButtonView()
+    let favoriteBottomButonView = BottomButtonView()
     let bottomRightButtonsStackView = HStackView(
         alignment: .center,
         distribution: .fillProportionally,

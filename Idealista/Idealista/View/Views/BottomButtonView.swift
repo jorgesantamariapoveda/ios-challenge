@@ -1,5 +1,5 @@
 //
-//  BottomButonView.swift
+//  BottomButtonView.swift
 //  Idealista
 //
 //  Created by Jorge on 20/10/24.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class BottomButonView: UIView {
+final class BottomButtonView: UIView {
     
     private let stackView = HStackView(spacing: 8)
     
