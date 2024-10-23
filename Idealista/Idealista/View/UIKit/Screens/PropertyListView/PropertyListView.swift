@@ -38,9 +38,7 @@ final class PropertyListView: UIView {
         super.init(frame: frame)
         
         configureViews()
-        
         activityIndicator.startAnimating()
-        
         configureTableView()
     }
     
