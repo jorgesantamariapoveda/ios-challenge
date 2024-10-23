@@ -12,12 +12,16 @@ struct CarruselView: View {
 
     var body: some View {
         ScrollView(.horizontal, showsIndicators: false) {
-            LazyHStack(spacing: 0) {
+            LazyHStack(spacing: 5) {
                 ForEach(0..<urls.count, id: \.self) { index in
-                    AsyncImage(url: URL(string: urls[index]), scale: 2)
+                    AsyncImage(url: URL(string: urls[index])) { image in
+                        image.resizable()
+                    } placeholder: {
+                        ProgressView()
+                    }
+                    .frame(width: UIScreen.main.bounds.width, height: 200)
                 }
             }
-            .padding(.horizontal, 16)
         }
     }
 }
