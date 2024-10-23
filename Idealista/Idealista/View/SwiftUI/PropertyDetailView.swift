@@ -16,9 +16,12 @@ struct PropertyDetailView: View {
     var body: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: 8) {
+                CarruselView(urls: representable.imagesUrl)
                 propertySection
                 threeButtonsSection
                 advertiserCommentSection
+                basicCharacteristicsSection
+                energyCertificationSection
             }
             .frame(maxWidth: .infinity)
         }
@@ -48,15 +51,19 @@ struct PropertyDetailView: View {
     
     private var threeButtonsSection: some View {
         HStack(alignment: .center) {
+            Spacer()
             ButtonDetailView(title: "Guardar", systemName: "heart") {
                 print("limit::")
             }
+            Spacer()
             ButtonDetailView(title: "Descartar", systemName: "trash") {
                 print("limit::")
             }
+            Spacer()
             ButtonDetailView(title: "Compartir", systemName: "square.and.arrow.up") {
                 print("limit::")
             }
+            Spacer()
         }
     }
     
@@ -91,6 +98,22 @@ struct PropertyDetailView: View {
                     .font(.footnote)
             }
             .padding(.horizontal)
+        }
+    }
+    
+    private var basicCharacteristicsSection: some View {
+        VStack(alignment: .leading, spacing: 8) {
+            Text("Características básicas")
+                .font(.title2)
+                .fontWeight(.bold)
+        }
+    }
+    
+    private var energyCertificationSection: some View {
+        VStack(alignment: .leading, spacing: 8) {
+            Text("Certificado energético")
+                .font(.title2)
+                .fontWeight(.bold)
         }
     }
 }
