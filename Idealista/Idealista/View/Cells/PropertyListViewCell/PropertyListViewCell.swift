@@ -36,7 +36,7 @@ final class PropertyListViewCell: UITableViewCell {
         layout.minimumInteritemSpacing = 0
         layout.itemSize = CGSize(width: UIScreen.main.bounds.width, height: 200)
         
-        let collectionView = UICollectionView(frame: contentView.bounds, collectionViewLayout: layout)
+        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.backgroundColor = .clear
         collectionView.showsHorizontalScrollIndicator = false
         collectionView.register(ImageCell.self, forCellWithReuseIdentifier: ImageCell.reuseId)
