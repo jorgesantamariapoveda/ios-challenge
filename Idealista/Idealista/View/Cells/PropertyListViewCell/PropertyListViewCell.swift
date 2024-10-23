@@ -100,7 +100,7 @@ final class PropertyListViewCell: UITableViewCell {
     private func configureDataSource() {
         dataSource = UICollectionViewDiffableDataSource<Int, String>(collectionView: carruselCollectionView) {
             (collectionView, indexPath, imageUrl) -> UICollectionViewCell? in
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ImageCell", for: indexPath) as! ImageCell
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ImageCell.reuseId, for: indexPath) as! ImageCell
             
             if let url = URL(string: imageUrl) {
                 cell.set(with: url)
