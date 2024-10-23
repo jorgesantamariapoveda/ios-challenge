@@ -29,7 +29,7 @@ struct ButtonDetailView: View {
                 Text(title)
                     .font(.callout)
             }
-            .tint(.idealistaPurple)
+            .foregroundStyle(.idealistaPurple)
         }
     }
 }
