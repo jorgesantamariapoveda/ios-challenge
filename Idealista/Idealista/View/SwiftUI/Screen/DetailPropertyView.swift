@@ -34,6 +34,7 @@ struct DetailPropertyView: View {
                     showFullComment: $showFullComment
                 )
                 DetailPropertyBasicCharacteristicsView()
+                    .environmentObject(viewModel)
                 DetailPropertyEnergyCertificationView()
             }
             .frame(maxWidth: .infinity)
@@ -42,28 +43,18 @@ struct DetailPropertyView: View {
             DetailPropertyAdvertiserFullCommentView()
         }
         .padding()
+        .onAppear {
+            viewModel.getDetailProperty()
+        }
     }
 }
 
 #Preview {
-    let property = Property(
-        id: "1",
-        imagesUrl: [
-            "https://img4.idealista.com/blur/WEB_LISTING-M/0/id.pro.es.image.master/58/60/32/1273036727.webp",
-            "https://img4.idealista.com/blur/WEB_LISTING-M/0/id.pro.es.image.master/a1/0f/ee/1273036728.webp",
-            "https://img4.idealista.com/blur/WEB_LISTING-M/0/id.pro.es.image.master/79/6b/e0/1273036729.webp",
-            "https://img4.idealista.com/blur/WEB_LISTING-M/0/id.pro.es.image.master/00/c5/91/1273036730.webp",
-        ],
-        address: "calle de Lagasca".capitalizeFirstWord(),
-        priceAmount: 1195000.0,
-        priceCurrencySuffix: "€",
-        isParkingSpaceIncludedInPrice: true,
-        rooms: 3,
-        size: 133.0
-    )
+    let representable = PropertyRepresentableMock.create()
     
-    let representable = PropertyRepresentable(domainModel: property)
-    let viewModel = DetailPropertyViewModel(getDetailPropertyUseCase: GetDetailPropertyUseCaseMock())
+    let viewModel = DetailPropertyViewModel(
+        getDetailPropertyUseCase: GetDetailPropertyUseCaseMock()
+    )
     
     DetailPropertyView(
         representable: representable,

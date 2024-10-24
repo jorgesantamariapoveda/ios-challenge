@@ -33,6 +33,7 @@ final class DetailPropertyViewModel: ObservableObject {
         self.getDetailPropertyUseCase = getDetailPropertyUseCase
     }
     
+    @MainActor
     func getDetailProperty() {
         state = .loading
                 
