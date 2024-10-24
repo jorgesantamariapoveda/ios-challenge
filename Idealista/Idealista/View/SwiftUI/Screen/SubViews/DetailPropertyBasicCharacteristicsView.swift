@@ -24,6 +24,8 @@ struct DetailPropertyBasicCharacteristicsView: View {
                 ProgressView()
             case .loaded:
                 if let representable = viewModel.detailPropertyRepresentable {
+                    Text(representable.communityCosts)
+                        .font(.callout)
                     Text(representable.baths)
                         .font(.callout)
                     Text(representable.rooms)

@@ -22,7 +22,7 @@ extension Double {
     
     func formatToCurrency() -> String {
         let formatter = NumberFormatter()
-        formatter.numberStyle = .decimal
+        formatter.numberStyle = .currency
         formatter.locale = Locale.current
         
         if let formattedValue = formatter.string(from: NSNumber(value: self)) {

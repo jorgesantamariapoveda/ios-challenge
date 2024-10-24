@@ -18,7 +18,7 @@ struct DetailPropertyRepresentable: Hashable {
 
     init(domainModel: DetailProperty) {
         self.description = domainModel.description
-        self.communityCosts = domainModel.basicCharacteristics.communityCosts.formatToCurrency()
+        self.communityCosts = "· Costes de comunidad \(domainModel.basicCharacteristics.communityCosts.formatToCurrency())"
         self.rooms = "· \(domainModel.basicCharacteristics.rooms) habitaciones"
         self.baths = "· \(domainModel.basicCharacteristics.baths) baños"
         self.boxroom = domainModel.basicCharacteristics.boxroom ? "· Trastero" : nil
