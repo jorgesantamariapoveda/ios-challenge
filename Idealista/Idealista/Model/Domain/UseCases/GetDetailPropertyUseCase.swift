@@ -22,3 +22,29 @@ final class GetDetailPropertyUseCaseImpl: GetDetailPropertyUseCase {
         try await repository.fetch()
     }
 }
+
+final class GetDetailPropertyUseCaseMock: GetDetailPropertyUseCase {
+    
+    func execute() async throws -> DetailProperty {
+        let basicCharacteristics = DetailProperty.BasicCharacteristics(
+            communityCosts: 330,
+            rooms: 3,
+            baths: 2,
+            boxroom: true
+        )
+        
+        let energyCertification = DetailProperty.EnergyCertification(
+            title: "title",
+            energyConsumption: "A",
+            emissions: "B"
+        )
+        
+        return DetailProperty(
+            description: "",
+            latitude: 111,
+            longitude: 222,
+            basicCharacteristics: basicCharacteristics,
+            energyCertification: energyCertification
+        )
+    }
+}

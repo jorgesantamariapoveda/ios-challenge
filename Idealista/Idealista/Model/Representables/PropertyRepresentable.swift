@@ -26,3 +26,24 @@ struct PropertyRepresentable: Hashable {
         self.size = "\(domainModel.size) m²"
     }
 }
+
+struct PropertyRepresentableMock {
+    static func create() -> PropertyRepresentable {
+        let property = Property(
+            id: "1",
+            imagesUrl: [
+                "https://img4.idealista.com/blur/WEB_LISTING-M/0/id.pro.es.image.master/58/60/32/1273036727.webp",
+                "https://img4.idealista.com/blur/WEB_LISTING-M/0/id.pro.es.image.master/a1/0f/ee/1273036728.webp",
+                "https://img4.idealista.com/blur/WEB_LISTING-M/0/id.pro.es.image.master/79/6b/e0/1273036729.webp",
+                "https://img4.idealista.com/blur/WEB_LISTING-M/0/id.pro.es.image.master/00/c5/91/1273036730.webp",
+            ],
+            address: "calle de Lagasca".capitalizeFirstWord(),
+            priceAmount: 1195000.0,
+            priceCurrencySuffix: "€",
+            isParkingSpaceIncludedInPrice: true,
+            rooms: 3,
+            size: 133.0
+        )
+        return PropertyRepresentable(domainModel: property)
+    }
+}
