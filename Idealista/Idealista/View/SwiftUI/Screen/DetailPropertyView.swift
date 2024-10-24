@@ -24,7 +24,7 @@ struct DetailPropertyView: View {
     @Environment(\.dismiss) private var dismiss
     
     var body: some View {
-        ScrollView {
+        ScrollView(showsIndicators: false) {
             VStack(alignment: .leading, spacing: 8) {
                 CarruselView(urls: representable.imagesUrl)
                 DetailPropertySectionView(representable: representable)
@@ -33,6 +33,8 @@ struct DetailPropertyView: View {
                     representable: representable,
                     showFullComment: $showFullComment
                 )
+                Divider()
+                    .padding(.vertical)
                 DetailPropertyBasicCharacteristicsView()
                     .environmentObject(viewModel)
                 DetailPropertyEnergyCertificationView()
