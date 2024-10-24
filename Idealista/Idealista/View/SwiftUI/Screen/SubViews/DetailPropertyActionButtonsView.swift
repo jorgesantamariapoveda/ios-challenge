@@ -9,29 +9,43 @@ import SwiftUI
 
 struct DetailPropertyActionButtonsView: View {
     
-    let representable: PropertyRepresentable
+    @ObservedObject private var viewModel: DetailPropertyViewModel
+    
+    init(viewModel: DetailPropertyViewModel) {
+        self.viewModel = viewModel
+    }
     
     var body: some View {
-        HStack(alignment: .center) {
-            Spacer()
-            ButtonDetailView(title: "Guardar", systemName: "heart") {
-                print("limit::")
+        VStack {
+            HStack(alignment: .center) {
+                Spacer()
+                ButtonDetailView(title: "Guardar", systemName: viewModel.isFavourite ? "heart.fill" : "heart") {
+                    withAnimation {
+                        viewModel.toggleFavourite()
+                    }
+                }
+                Spacer()
+                ButtonDetailView(title: "Descartar", systemName: "trash") {
+                    print("limit::")
+                }
+                Spacer()
+                ButtonDetailView(title: "Compartir", systemName: "square.and.arrow.up") {
+                    print("limit::")
+                }
+                Spacer()
             }
-            Spacer()
-            ButtonDetailView(title: "Descartar", systemName: "trash") {
-                print("limit::")
+            
+            if let favouriteDate = viewModel.getFavouriteDate() {
+                Text("Guardado el \(favouriteDate)")
+                    .font(.callout)
+                    .padding()
+                    .background(.idealistaPurple)
+                    .foregroundColor(.white)
+                    .cornerRadius(16)
             }
-            Spacer()
-            ButtonDetailView(title: "Compartir", systemName: "square.and.arrow.up") {
-                print("limit::")
-            }
-            Spacer()
+        }
+        .onAppear {
+            viewModel.checkIfFavourite()
         }
     }
-}
-
-#Preview {
-    let representable = PropertyRepresentableMock.create()
-    
-    DetailPropertyActionButtonsView(representable: representable)
 }

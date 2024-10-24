@@ -10,13 +10,8 @@ import SwiftUI
 struct DetailPropertyView: View {
     
     @ObservedObject private var viewModel: DetailPropertyViewModel
-    private let representable: PropertyRepresentable
 
-    init(
-        representable: PropertyRepresentable,
-        viewModel: DetailPropertyViewModel
-    ) {
-        self.representable = representable
+    init(viewModel: DetailPropertyViewModel) {
         self.viewModel = viewModel
     }
     
@@ -26,11 +21,11 @@ struct DetailPropertyView: View {
     var body: some View {
         ScrollView(showsIndicators: false) {
             VStack(alignment: .leading, spacing: 8) {
-                CarruselView(urls: representable.imagesUrl)
-                DetailPropertySectionView(representable: representable)
-                DetailPropertyActionButtonsView(representable: representable)
+                CarruselView(urls: viewModel.representable.imagesUrl)
+                DetailPropertySectionView(representable: viewModel.representable)
+                DetailPropertyActionButtonsView(viewModel: viewModel)
                 DetailPropertyAdvertiserCommentView(
-                    representable: representable,
+                    representable: viewModel.representable,
                     showFullComment: $showFullComment
                 )
                 Divider()
@@ -56,12 +51,10 @@ struct DetailPropertyView: View {
     let representable = PropertyRepresentableMock.create()
     
     let viewModel = DetailPropertyViewModel(
+        representable: representable,
         getDetailPropertyUseCase: GetDetailPropertyUseCaseMock()
     )
     
-    DetailPropertyView(
-        representable: representable,
-        viewModel: viewModel
-    )
+    DetailPropertyView(viewModel: viewModel)
 }
 

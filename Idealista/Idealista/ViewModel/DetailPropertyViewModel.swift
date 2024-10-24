@@ -9,6 +9,7 @@ import Foundation
 
 final class DetailPropertyViewModel: ObservableObject {
     
+    let representable: PropertyRepresentable
     private let getDetailPropertyUseCase: GetDetailPropertyUseCase
     
     enum State {
@@ -27,9 +28,14 @@ final class DetailPropertyViewModel: ObservableObject {
     }
     @Published var showErrors = false
     
+    @Published var isFavourite: Bool = false
+    @Published var favouriteDate: String?
+    
     init(
+        representable: PropertyRepresentable,
         getDetailPropertyUseCase: GetDetailPropertyUseCase = GetDetailPropertyUseCaseImpl()
     ) {
+        self.representable = representable
         self.getDetailPropertyUseCase = getDetailPropertyUseCase
     }
     
@@ -47,5 +53,36 @@ final class DetailPropertyViewModel: ObservableObject {
                 errors = error.localizedDescription
             }
         }
+    }
+    
+    @MainActor
+    func toggleFavourite() {
+        if isFavourite {
+            UserDefaults.standard.removeObject(forKey: representable.id)
+            isFavourite = false
+        } else {
+            let currentDate = Date()
+            let dateString = currentDate.toString(format: .dd_yy_mm)
+            UserDefaults.standard.set(dateString, forKey: representable.id)
+            favouriteDate = dateString
+            isFavourite = true
+        }
+    }
+    
+    @MainActor
+    func checkIfFavourite() {
+        if let date = UserDefaults.standard.string(forKey: representable.id) {
+            favouriteDate = date
+            isFavourite = true
+        } else {
+            isFavourite = false
+        }
+    }
+    
+    func getFavouriteDate() -> String? {
+        if isFavourite, let favouriteDate {
+            return favouriteDate
+        }
+        return nil
     }
 }
