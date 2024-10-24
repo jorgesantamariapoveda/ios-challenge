@@ -8,6 +8,7 @@
 import Foundation
 
 extension Double {
+    
     func formatToCurrencyWithoutCurrencySymbol() -> String {
         let formatter = NumberFormatter()
         formatter.numberStyle = .decimal
@@ -18,9 +19,11 @@ extension Double {
             return "\(self)"
         }
     }
+    
     func formatToCurrency() -> String {
         let formatter = NumberFormatter()
         formatter.numberStyle = .decimal
+        formatter.locale = Locale.current
         
         if let formattedValue = formatter.string(from: NSNumber(value: self)) {
             return formattedValue
