@@ -23,7 +23,7 @@ struct DetailPropertyAdvertiserFullCommentView: View {
             
             ScrollView(showsIndicators: false) {
                 Text(comentario)
-                    .font(.footnote)
+                    .font(.callout)
             }
             .padding(.horizontal)
         }

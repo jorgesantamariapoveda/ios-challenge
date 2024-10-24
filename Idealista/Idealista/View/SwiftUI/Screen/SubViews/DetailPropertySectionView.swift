@@ -24,7 +24,7 @@ struct DetailPropertySectionView: View {
                 Text(representable.rooms)
                 Text(representable.size)
             }
-            .font(.caption)
+            .font(.callout)
             .padding(.bottom, 8)
         }
     }

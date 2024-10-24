@@ -18,7 +18,7 @@ struct DetailPropertyAdvertiserCommentView: View {
                 .font(.title2)
                 .fontWeight(.bold)
             Text(comentario)
-                .font(.caption)
+                .font(.callout)
                 .lineLimit(5)
             ButtonDetailView(title: "Ir al comentario completo") {
                 showFullComment.toggle()
