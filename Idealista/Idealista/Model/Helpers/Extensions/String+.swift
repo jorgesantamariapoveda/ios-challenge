@@ -8,6 +8,7 @@
 import Foundation
 
 extension String {
+    
     func capitalizeFirstWord() -> String {
         var words = self.components(separatedBy: " ")
         
