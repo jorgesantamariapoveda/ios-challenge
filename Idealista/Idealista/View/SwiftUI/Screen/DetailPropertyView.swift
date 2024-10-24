@@ -36,6 +36,7 @@ struct DetailPropertyView: View {
                 DetailPropertyBasicCharacteristicsView()
                     .environmentObject(viewModel)
                 DetailPropertyEnergyCertificationView()
+                    .environmentObject(viewModel)
             }
             .frame(maxWidth: .infinity)
         }

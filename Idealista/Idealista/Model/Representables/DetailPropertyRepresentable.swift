@@ -22,8 +22,8 @@ struct DetailPropertyRepresentable: Hashable {
         self.rooms = "· \(domainModel.basicCharacteristics.rooms) habitaciones"
         self.baths = "· \(domainModel.basicCharacteristics.baths) baños"
         self.boxroom = domainModel.basicCharacteristics.boxroom ? "· Trastero" : nil
-        self.energyConsumption = domainModel.energyCertification.energyConsumption.uppercased()
-        self.emissions = domainModel.energyCertification.emissions.uppercased()
+        self.energyConsumption = "· Consumo: \(domainModel.energyCertification.energyConsumption.uppercased())"
+        self.emissions = "· Emisiones: \(domainModel.energyCertification.emissions.uppercased())"
     }
 }
 
