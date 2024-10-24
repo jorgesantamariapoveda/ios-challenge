@@ -33,7 +33,6 @@ struct DetailPropertyBasicCharacteristicsView: View {
                             .font(.callout)
                     }
                 }
-                
             case .error:
                 Text("Error")
             }
