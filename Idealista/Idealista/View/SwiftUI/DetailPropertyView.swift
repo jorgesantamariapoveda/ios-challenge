@@ -1,5 +1,5 @@
 //
-//  PropertyDetailView.swift
+//  DetailPropertyView.swift
 //  Idealista
 //
 //  Created by Jorge on 23/10/24.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct PropertyDetailView: View {
+struct DetailPropertyView: View {
     let representable: PropertyRepresentable
     
     @State private var showFullComment = false
@@ -137,7 +137,7 @@ struct PropertyDetailView: View {
     
     let representable = PropertyRepresentable(domainModel: property)
     
-    PropertyDetailView(representable: representable)
+    DetailPropertyView(representable: representable)
 }
 
 let comentario = """

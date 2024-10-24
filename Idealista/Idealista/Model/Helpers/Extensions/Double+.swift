@@ -18,4 +18,14 @@ extension Double {
             return "\(self)"
         }
     }
+    func formatToCurrency() -> String {
+        let formatter = NumberFormatter()
+        formatter.numberStyle = .decimal
+        
+        if let formattedValue = formatter.string(from: NSNumber(value: self)) {
+            return formattedValue
+        } else {
+            return "\(self)"
+        }
+    }
 }

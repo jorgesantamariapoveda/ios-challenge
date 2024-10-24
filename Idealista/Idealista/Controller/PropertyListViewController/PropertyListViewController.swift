@@ -10,9 +10,8 @@ import SwiftUI
 
 final class PropertyListViewController: UIViewController {
     
-    private var propertyListView = PropertyListView()
-    
-    private var getPropertyListUseCase: GetPropertyListUseCase
+    private let propertyListView = PropertyListView()
+    private let getPropertyListUseCase: GetPropertyListUseCase
     
     init(
         getPropertyListUseCase: GetPropertyListUseCase = GetPropertyListUseCaseImpl()
@@ -56,7 +55,7 @@ final class PropertyListViewController: UIViewController {
 // MARK: - PropertyListViewDelegate
 extension PropertyListViewController: PropertyListViewDelegate {
     func didSelect(representable: PropertyRepresentable) {
-        let swiftUIView = PropertyDetailView(representable: representable)
+        let swiftUIView = DetailPropertyView(representable: representable)
         let hostingController = UIHostingController(rootView: swiftUIView)
         navigationController?.pushViewController(hostingController, animated: true)
     }
