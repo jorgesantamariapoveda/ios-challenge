@@ -21,7 +21,7 @@ final class FootLabelView: UILabel {
     private func configureView() {
         translatesAutoresizingMaskIntoConstraints = false
         textAlignment = .left
-        font = .preferredFont(forTextStyle: .caption1)
+        font = .preferredFont(forTextStyle: .footnote)
         textColor = .gray
     }
     

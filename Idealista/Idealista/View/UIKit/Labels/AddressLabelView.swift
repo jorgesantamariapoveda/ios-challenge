@@ -21,7 +21,7 @@ final class AddressLabelView: UILabel {
     private func configureView() {
         translatesAutoresizingMaskIntoConstraints = false
         textAlignment = .left
-        font = .preferredFont(forTextStyle: .subheadline)
+        font = .preferredFont(forTextStyle: .callout)
         textColor = .idealistaPurple
     }
     
