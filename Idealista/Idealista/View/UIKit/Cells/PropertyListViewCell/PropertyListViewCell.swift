@@ -107,7 +107,7 @@ final class PropertyListViewCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    @objc func handleNotification(_ notification: Notification) {
+    @objc private func handleNotification(_ notification: Notification) {
         checkIfFavourite()
     }
     
