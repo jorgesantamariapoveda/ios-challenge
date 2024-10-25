@@ -64,4 +64,8 @@ extension PropertyListViewController: PropertyListViewDelegate {
         let hostingController = UIHostingController(rootView: swiftUIView)
         navigationController?.pushViewController(hostingController, animated: true)
     }
+    
+    func pullToRefresh() {
+        loadData()
+    }
 }

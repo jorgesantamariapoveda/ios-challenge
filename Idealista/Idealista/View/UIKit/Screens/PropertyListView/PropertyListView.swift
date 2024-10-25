@@ -9,6 +9,7 @@ import UIKit
 
 protocol PropertyListViewDelegate: AnyObject {
     func didSelect(representable: PropertyRepresentable)
+    func pullToRefresh()
 }
 
 final class PropertyListView: UIView {
@@ -23,11 +24,14 @@ final class PropertyListView: UIView {
         return activityIndicator
     }()
     
+    private let refreshControl = UIRefreshControl()
+    
     lazy var tableView: UITableView = {
         let tableView = UITableView(frame: .zero, style: .grouped)
         tableView.backgroundColor = UIColor.systemBackground
         tableView.register(PropertyListViewCell.self, forCellReuseIdentifier: PropertyListViewCell.reuseId)
         tableView.separatorStyle = .none
+        tableView.refreshControl = refreshControl
         tableView.translatesAutoresizingMaskIntoConstraints = false
         return tableView
     }()
@@ -41,6 +45,7 @@ final class PropertyListView: UIView {
         configureViews()
         activityIndicator.startAnimating()
         configureTableView()
+        configureRefreshControl()
     }
     
     required init?(coder: NSCoder) {
@@ -71,12 +76,22 @@ final class PropertyListView: UIView {
         dataSource.apply(snapshot, animatingDifferences: animatingDifferences)
     }
     
+    private func configureRefreshControl() {
+        refreshControl.attributedTitle = NSAttributedString(string: "Cargando datos...")
+        refreshControl.addTarget(self, action: #selector(pullToRefresh), for: .valueChanged)
+    }
+    
+    @objc private func pullToRefresh() {
+        delegate?.pullToRefresh()
+    }
+    
     func set(representable: [PropertyRepresentable]) {
         data.removeAll()
         data.append(contentsOf: representable)
         applySnapshot()
         
         activityIndicator.stopAnimating()
+        refreshControl.endRefreshing()
     }
 }
 
