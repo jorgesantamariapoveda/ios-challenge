@@ -7,7 +7,13 @@
 
 import UIKit
 
+protocol BottomButtonViewDelegate: AnyObject {
+    func didButtonTapped()
+}
+
 final class BottomButtonView: UIView {
+    
+    weak var delegate: BottomButtonViewDelegate?
     
     enum Constants {
         static let sizeImageButton: CGFloat = 16
@@ -15,15 +21,14 @@ final class BottomButtonView: UIView {
     
     private let stackView = HStackView(spacing: 8)
     
-    private lazy var imageView: UIImageView = {
-        let imageView = UIImageView()
-        imageView.translatesAutoresizingMaskIntoConstraints = false
-        imageView.image = UIImage(systemName: "phone")
-        imageView.tintColor = .idealistaPurple
-        imageView.contentMode = .scaleToFill
-        return imageView
+    private lazy var button: UIButton = {
+        let button = UIButton(type: .custom)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.tintColor = .idealistaPurple
+        button.addTarget(self, action: #selector(buttonTapped), for: .touchUpInside)
+        return button
     }()
-
+    
     private lazy var label: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -45,7 +50,7 @@ final class BottomButtonView: UIView {
 
     private func setupView() {
         addSubview(stackView)
-        stackView.addArrangedSubview(imageView)
+        stackView.addArrangedSubview(button)
         stackView.addArrangedSubview(label)
         
         NSLayoutConstraint.activate([
@@ -56,9 +61,13 @@ final class BottomButtonView: UIView {
         ])
         
         NSLayoutConstraint.activate([
-            imageView.heightAnchor.constraint(equalToConstant: Constants.sizeImageButton),
-            imageView.widthAnchor.constraint(equalToConstant: Constants.sizeImageButton),
+            button.heightAnchor.constraint(equalToConstant: Constants.sizeImageButton),
+            button.widthAnchor.constraint(equalToConstant: Constants.sizeImageButton),
         ])
+    }
+    
+    @objc private func buttonTapped() {
+        delegate?.didButtonTapped()
     }
     
     func set(text: String? = nil, imageSystemName: String) {
@@ -66,6 +75,7 @@ final class BottomButtonView: UIView {
             label.text = text
             label.isHidden = false
         }
-        imageView.image = UIImage(systemName: imageSystemName)
+        
+        button.setImage(UIImage(systemName: imageSystemName), for: .normal)
     }
 }

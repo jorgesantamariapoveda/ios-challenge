@@ -90,6 +90,8 @@ final class PropertyListViewCell: UITableViewCell {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
         selectionStyle = .none
+        favoriteBottomButonView.delegate = self
+        
         configureViews()
         configureDataSource()
     }
@@ -138,6 +140,19 @@ final class PropertyListViewCell: UITableViewCell {
         favoriteBottomButonView.set(imageSystemName: "heart")
         
         applySnapshot(with: representable.imagesUrl)
+        
+        checkIfFavourite()
+    }
+    
+    private func checkIfFavourite() {
+        guard let representable, let storage else {
+            return
+        }
+        if let _ = storage.retrieve(forKey: representable.id) {
+            favoriteBottomButonView.set(imageSystemName: "heart.fill")
+        } else {
+            favoriteBottomButonView.set(imageSystemName: "heart")
+        }
     }
 }
 
@@ -146,5 +161,26 @@ extension PropertyListViewCell: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         guard let representable else { return }
         delegate?.didSelect(representable: representable)
+    }
+}
+
+// MARK: - BottomButtonViewDelegate
+extension PropertyListViewCell: BottomButtonViewDelegate {
+    func didButtonTapped() {
+        toggleFavourite()
+        checkIfFavourite()
+    }
+    
+    private func toggleFavourite() {
+        guard let representable, let storage else {
+            return
+        }
+        if let _ = storage.retrieve(forKey: representable.id) {
+            storage.remove(forKey: representable.id)
+        } else {
+            let currentDate = Date()
+            let dateString = currentDate.toString(format: .dd_yy_mm)
+            storage.save(value: dateString, forKey: representable.id)
+        }
     }
 }
