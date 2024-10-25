@@ -29,8 +29,8 @@ struct DetailPropertyEnergyCertificationView: View {
                     Text(representable.emissions)
                         .font(.callout)
                 }
-            case .error:
-                Text("Error")
+            case let .error(value):
+                Text("Error🚨 : \(value)")
             }
         }
     }

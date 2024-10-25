@@ -9,6 +9,8 @@ import SwiftUI
 
 struct DetailPropertyAdvertiserFullCommentView: View {
     
+    @EnvironmentObject private var viewModel: DetailPropertyViewModel
+    
     var body: some View {
         VStack {
             HStack(alignment: .center, spacing: 16) {
@@ -22,8 +24,19 @@ struct DetailPropertyAdvertiserFullCommentView: View {
             Divider()
             
             ScrollView(showsIndicators: false) {
-                Text(comentario)
-                    .font(.callout)
+                switch viewModel.state {
+                case .idle:
+                    EmptyView()
+                case .loading:
+                    ProgressView()
+                case .loaded:
+                    if let representable = viewModel.detailPropertyRepresentable {
+                        Text(representable.description)
+                            .font(.callout)
+                    }
+                case let .error(value):
+                    Text("Error🚨 : \(value)")
+                }
             }
             .padding(.horizontal)
         }

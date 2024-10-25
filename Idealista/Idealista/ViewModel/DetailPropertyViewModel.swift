@@ -16,7 +16,7 @@ final class DetailPropertyViewModel: ObservableObject {
         case idle
         case loading
         case loaded
-        case error
+        case error(String)
     }
     
     @Published var detailPropertyRepresentable: DetailPropertyRepresentable?
@@ -49,7 +49,7 @@ final class DetailPropertyViewModel: ObservableObject {
                 detailPropertyRepresentable = DetailPropertyRepresentable(domainModel: detailProperty)
                 state = .loaded
             } catch {
-                state = .error
+                state = .error(error.localizedDescription)
                 errors = error.localizedDescription
             }
         }

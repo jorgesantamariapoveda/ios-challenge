@@ -24,10 +24,7 @@ struct DetailPropertyView: View {
                 CarruselView(urls: viewModel.representable.imagesUrl)
                 DetailPropertySectionView(representable: viewModel.representable)
                 DetailPropertyActionButtonsView(viewModel: viewModel)
-                DetailPropertyAdvertiserCommentView(
-                    representable: viewModel.representable,
-                    showFullComment: $showFullComment
-                )
+                DetailPropertyAdvertiserCommentView(showFullComment: $showFullComment)
                 Divider()
                     .padding(.vertical)
                 DetailPropertyBasicCharacteristicsView()
@@ -39,6 +36,7 @@ struct DetailPropertyView: View {
         }
         .sheet(isPresented: $showFullComment) {
             DetailPropertyAdvertiserFullCommentView()
+                .environmentObject(viewModel)
         }
         .padding()
         .onAppear {

@@ -9,7 +9,6 @@ import SwiftUI
 
 struct DetailPropertyAdvertiserCommentView: View {
     
-    let representable: PropertyRepresentable
     @Binding var showFullComment: Bool
     
     var body: some View {
@@ -28,7 +27,5 @@ struct DetailPropertyAdvertiserCommentView: View {
 }
 
 #Preview {
-    let representable = PropertyRepresentableMock.create()
-  
-    DetailPropertyAdvertiserCommentView(representable: representable, showFullComment: .constant(true))
+    DetailPropertyAdvertiserCommentView(showFullComment: .constant(true))
 }
