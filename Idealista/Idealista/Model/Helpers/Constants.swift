@@ -12,4 +12,8 @@ struct Constants {
     struct API {
         static let baseURL = "https://idealista.github.io/ios-challenge/"
     }
+    
+    struct NotificationName {
+        static let favoriteTapped = Notification.Name("FavoriteTapped")
+    }
 }

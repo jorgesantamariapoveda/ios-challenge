@@ -94,10 +94,21 @@ final class PropertyListViewCell: UITableViewCell {
         
         configureViews()
         configureDataSource()
+        
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(handleNotification(_:)),
+            name: Constants.NotificationName.favoriteTapped,
+            object: nil
+        )
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    @objc func handleNotification(_ notification: Notification) {
+        checkIfFavourite()
     }
     
     private func configureDataSource() {

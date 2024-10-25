@@ -70,6 +70,11 @@ final class DetailPropertyViewModel: ObservableObject {
             favouriteDate = dateString
             isFavourite = true
         }
+        
+        NotificationCenter.default.post(
+            name: Constants.NotificationName.favoriteTapped,
+            object: nil
+        )
     }
     
     @MainActor
