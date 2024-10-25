@@ -18,6 +18,7 @@ final class PropertyListViewCell: UITableViewCell {
     weak var delegate: PropertyListViewCellDelegate?
     
     private var representable: PropertyRepresentable?
+    var storage: StorageProtocol?
     
     let containerView: UIView = {
         let view = UIView()

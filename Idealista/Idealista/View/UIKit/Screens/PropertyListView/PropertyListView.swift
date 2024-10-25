@@ -14,6 +14,7 @@ protocol PropertyListViewDelegate: AnyObject {
 final class PropertyListView: UIView {
     
     weak var delegate: PropertyListViewDelegate?
+    var storage: StorageProtocol?
     
     lazy var activityIndicator: UIActivityIndicatorView = {
         let activityIndicator = UIActivityIndicatorView(style: .large)
@@ -53,11 +54,12 @@ final class PropertyListView: UIView {
     }
 
     private func configureDataSource() {
-        dataSource = UITableViewDiffableDataSource<Int, PropertyRepresentable>(tableView: tableView) {
+        dataSource = UITableViewDiffableDataSource<Int, PropertyRepresentable>(tableView: tableView) { [weak self]
             (tableView, indexPath, item) -> PropertyListViewCell? in
             let cell = tableView.dequeueReusableCell(withIdentifier: PropertyListViewCell.reuseId, for: indexPath) as? PropertyListViewCell
             cell?.set(representable: item)
             cell?.delegate = self
+            cell?.storage = self?.storage
             return cell
         }
     }

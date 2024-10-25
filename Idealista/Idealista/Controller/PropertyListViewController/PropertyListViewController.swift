@@ -11,11 +11,14 @@ import SwiftUI
 final class PropertyListViewController: UIViewController {
     
     private let propertyListView = PropertyListView()
+    private let storage: StorageProtocol
     private let getPropertyListUseCase: GetPropertyListUseCase
     
     init(
+        storage: StorageProtocol = UserDefaultsStorage(),
         getPropertyListUseCase: GetPropertyListUseCase = GetPropertyListUseCaseImpl()
     ) {
+        self.storage = storage
         self.getPropertyListUseCase = getPropertyListUseCase
         
         super.init(nibName: nil, bundle: nil)
@@ -30,6 +33,7 @@ final class PropertyListViewController: UIViewController {
      
         addSubviews()
         propertyListView.delegate = self
+        propertyListView.storage = storage
         loadData()
     }
     
