@@ -9,6 +9,10 @@ import UIKit
 
 final class BottomButtonView: UIView {
     
+    enum Constants {
+        static let sizeImageButton: CGFloat = 16
+    }
+    
     private let stackView = HStackView(spacing: 8)
     
     private lazy var imageView: UIImageView = {
@@ -52,8 +56,8 @@ final class BottomButtonView: UIView {
         ])
         
         NSLayoutConstraint.activate([
-            imageView.heightAnchor.constraint(equalToConstant: 24),
-            imageView.widthAnchor.constraint(equalToConstant: 24),
+            imageView.heightAnchor.constraint(equalToConstant: Constants.sizeImageButton),
+            imageView.widthAnchor.constraint(equalToConstant: Constants.sizeImageButton),
         ])
     }
     
