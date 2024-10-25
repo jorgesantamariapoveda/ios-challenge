@@ -63,3 +63,8 @@ Build a small app that allows users to browse through a list of ads and view ad 
 - macOS Sequoia 16.0.1
 - Xcode 16.0
 - iOS 15 through iOS 18
+
+![Main](./screenshots/main.png "Main")
+![Detail1](./screenshots/detail1.png "Detail 1")
+![Detail2](./screenshots/detail2.png "Detail 2")
+![Detail3](./screenshots/detail2.png "Detail 3")
