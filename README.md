@@ -54,3 +54,9 @@ Build a small app that allows users to browse through a list of ads and view ad 
 ### 🎉 Once You’ve Finished
 1. Email us at [tlfernandez@idealista.com](mailto:tlfernandez@idealista.com) with your repository link you'd like our iOS team to review, or send the project folder (including the `.git` directory).
 2. Celebrate with a beer after a well done job! 🍺
+
+### 🏁🏁🏁 Working environment for de iOS Challenge 🏁🏁🏁
+- MacBook Air M1 (8 GB, 500 GB SSD)
+- macOS Sequoia 16.0.1
+- Xcode 16.0
+- iOS 15.0
