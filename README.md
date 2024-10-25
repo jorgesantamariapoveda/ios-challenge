@@ -67,4 +67,4 @@ Build a small app that allows users to browse through a list of ads and view ad 
 ![Main](./screenshots/main.png "Main")
 ![Detail1](./screenshots/detail1.png "Detail 1")
 ![Detail2](./screenshots/detail2.png "Detail 2")
-![Detail3](./screenshots/detail2.png "Detail 3")
+![Detail3](./screenshots/detail3.png "Detail 3")
