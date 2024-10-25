@@ -62,4 +62,4 @@ Build a small app that allows users to browse through a list of ads and view ad 
 - MacBook Air M1 (8 GB, 500 GB SSD)
 - macOS Sequoia 16.0.1
 - Xcode 16.0
-- iOS 15.0
+- iOS 15 through iOS 18
